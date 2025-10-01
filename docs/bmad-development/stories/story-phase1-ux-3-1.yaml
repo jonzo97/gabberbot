@@ -1,0 +1,256 @@
+# Story 3.1: Conversational AI Enhancement
+# Epic 3 User Experience & Interface - Advanced Natural Language Processing
+
+---
+metadata:
+  story_id: story-phase1-ux-3-1
+  epic: docs/bmad-development/epics/epic-03-user-experience-interface.md
+  phase: phase-1-ux
+  created_date: 2024-09-16
+  created_by: Claude Code (Beatrix BMAD SM)
+  size: L
+  priority: P1
+  status: Ready
+
+dependencies:
+  required_stories: ["story-phase1-enhancement-2-4"]
+  external_deps: ["Advanced NLP libraries", "Multi-model AI integration"]
+  
+context:
+  business_value: |
+    Transforms the system into a true "jamming partner" with sophisticated
+    natural language understanding for hardcore music production. Users can
+    have nuanced conversations about musical style, evolution, and production
+    techniques using professional terminology and slang.
+    
+    User Impact: "make it sound more like Angerfist's Rotterdam style" → style transfer
+    "add some of that warehouse atmosphere from the 90s" → contextual understanding
+    This creates the promised "ChatOps for music production" conversational experience.
+    
+    From Epic 3: Advanced conversational AI with hardcore music intelligence
+    Creates the ConversationService for sophisticated music production dialogue.
+    
+  epic_relationship: |
+    Story 3.1 begins Epic 3's focus on user experience by creating advanced
+    conversational AI. Works with Stories 3.2-3.3 for pattern library and
+    terminal interface to create a complete user-centric production environment.
+    
+  current_state: |
+    Epic 2 completed advanced production capabilities with professional synthesis.
+    Repository has working AdvancedSynthesisService, EvolutionService, EffectsService,
+    and HardwareService. Need sophisticated conversational AI to make these powerful
+    tools accessible through natural language interaction.
+
+requirements:
+  functional: |
+    Advanced Conversational AI:
+    - ConversationService with multi-model AI integration (Claude, GPT, Gemini)
+    - Hardcore music terminology understanding and context awareness
+    - Intent classification for complex production commands
+    - Context memory for multi-turn production conversations
+    - Style transfer commands with artist and genre understanding
+    - Learning system that adapts to user vocabulary and preferences
+    
+    Hardcore Music Intelligence:
+    - Professional terminology: "doorlussen", "rumble", "hoover", "warehouse"
+    - Artist style recognition: Angerfist, Rotterdam Terror Corps, Industrial Strength
+    - Era-specific knowledge: 90s warehouse, early 2000s gabber, modern uptempo
+    - Production technique understanding: sidechain pumping, analog saturation
+    - Equipment knowledge: TR-909, Alpha Juno, analog mixers, effect units
+    
+  non_functional:
+    performance: AI response time <2 seconds for complex queries
+    quality: Professional music production conversation capability
+    reliability: Consistent understanding across conversation turns
+    usability: Natural, intuitive dialogue matching producer workflow
+    
+architecture:
+  patterns: |
+    From CLAUDE.md AI Integration:
+    - Multi-model routing strategy for different conversation types
+    - ConversationService implementing advanced NLP and context management
+    - Integration with all existing services (Evolution, Effects, Hardware, Synthesis)
+    - Professional music production knowledge base with hardcore specialization
+    
+    From Hardcore Production Knowledge:
+    - Genre-specific vocabulary and terminology database
+    - Artist style parameter mappings for style transfer
+    - Production technique classification and parameter translation
+    - Equipment knowledge base for authentic hardware emulation
+    
+  components:
+    new: 
+      - src/services/conversation_service.py (advanced conversational AI)
+      - src/ai/ (multi-model integration and routing)
+      - src/knowledge/hardcore_vocabulary.py (music terminology database)
+      - src/nlp/ (advanced intent classification and entity extraction)
+      - src/learning/ (user preference learning and adaptation)
+      - tests/conversation/ (conversation quality and understanding testing)
+    modify:
+      - src/services/generation_service.py (integrate advanced conversation)
+      - main.py (add sophisticated conversation interface)
+    integrate:
+      - All existing services from Epic 2 for comprehensive control
+      - Existing knowledge/ folder for hardcore production techniques
+      - CLAUDE.md music intelligence for authentic conversation
+    
+  constraints: |
+    - Conversation must maintain hardcore aesthetic and professional terminology
+    - AI responses must be contextually relevant to music production
+    - Multi-turn conversation memory for complex production sessions
+    - No generic music advice that conflicts with hardcore production goals
+    - Professional producer workflow compatibility and efficiency
+    
+  existing_code:
+    leverage: 
+      - Existing GenerationService for basic natural language processing
+      - CLAUDE.md hardcore music knowledge and production parameters
+      - All Epic 2 services for comprehensive system control
+      - Professional music production terminology and techniques
+    avoid:
+      - Academic music theory that conflicts with hardcore aesthetics
+      - Generic AI responses without music production context
+    refactor:
+      - Enhance existing GenerationService with advanced conversation capabilities
+      - Extract reusable NLP components for different conversation types
+
+acceptance_criteria:
+  - [ ] ConversationService with multi-model AI integration (Claude, GPT, Gemini)
+  - [ ] Advanced intent classification for complex production commands
+  - [ ] Hardcore music terminology understanding and context awareness
+  - [ ] Multi-turn conversation memory and context preservation
+  - [ ] Style transfer commands with artist and genre recognition
+  - [ ] User preference learning and vocabulary adaptation
+  - [ ] Professional music production terminology support
+  - [ ] Integration with all Epic 2 services (Evolution, Effects, Hardware, Synthesis)
+  - [ ] Era-specific knowledge for different hardcore periods and styles
+  - [ ] Equipment knowledge base for authentic hardware emulation requests
+  - [ ] Unit tests for conversation understanding and response quality
+  - [ ] Integration tests for complete conversational production workflow
+
+testing:
+  unit_tests:
+    - ConversationService intent classification accuracy
+    - Multi-model AI integration and routing logic
+    - Hardcore terminology recognition and understanding
+    - Context memory and conversation state management
+    - User preference learning and adaptation algorithms
+    
+  integration_tests:
+    - Conversation + all Epic 2 services integration
+    - Multi-turn production conversation workflows
+    - Style transfer conversation to actual audio generation
+    - Professional production session simulation
+    
+  validation:
+    conversation_quality: Natural, professional music production dialogue
+    understanding_accuracy: Correct interpretation of complex production commands
+    context_preservation: Consistent understanding across conversation turns
+    
+  test_data: |
+    Conversation Test Cases:
+    - "make it sound more like Angerfist's Rotterdam style" → style transfer
+    - "add some warehouse atmosphere from the early 90s" → era-specific processing
+    - "use that doorlussen technique on the kick" → technique-specific production
+    - "give me more of that Alpha Juno hoover sound" → equipment-specific synthesis
+    - "make the sidechain pump harder like in classic gabber" → style-aware evolution
+    
+    Expected Conversation Capability:
+    - Professional music production terminology understanding
+    - Contextual awareness of hardcore music history and techniques
+    - Multi-turn conversation with memory and coherence
+    - Accurate translation from natural language to production parameters
+
+dev_notes:
+  implementation_hints: |
+    - Use transformer-based models for advanced natural language understanding
+    - Implement conversation memory with context window management
+    - Create music terminology database with parameter mappings
+    - Use multi-model routing for different conversation complexity levels
+    - Implement user preference learning with vocabulary adaptation
+    
+  reference_implementations: |
+    - CLAUDE.md AI integration patterns and music knowledge
+    - Professional music production terminology and techniques
+    - Hardcore music history and artist style characteristics
+    - Existing GenerationService for basic NLP patterns
+    
+  technical_decisions: |
+    - AI architecture: Multi-model integration with Claude primary, GPT/Gemini secondary
+    - NLP approach: Transformer-based intent classification with music domain specialization
+    - Context memory: Sliding window with music production session awareness
+    - Terminology database: Hierarchical music knowledge with parameter mappings
+    - Learning system: User preference tracking with vocabulary adaptation
+
+tasks:
+  - [ ] Implement ConversationService architecture
+    - [ ] Create ConversationService class with multi-model AI integration
+    - [ ] Implement advanced intent classification for production commands
+    - [ ] Add multi-turn conversation memory and context management
+    - [ ] Create user preference learning and adaptation system
+  - [ ] Build hardcore music intelligence
+    - [ ] Implement hardcore terminology database and recognition
+    - [ ] Create artist style recognition and parameter mapping
+    - [ ] Add era-specific knowledge for different hardcore periods
+    - [ ] Build equipment knowledge base for hardware emulation
+  - [ ] Create sophisticated conversation interface
+    - [ ] Integrate with all Epic 2 services for comprehensive control
+    - [ ] Add style transfer conversation to audio generation pipeline
+    - [ ] Create professional production workflow conversation patterns
+    - [ ] Implement context-aware response generation
+  - [ ] Testing and conversation validation
+    - [ ] Unit tests for all conversation understanding components
+    - [ ] Professional music production dialogue testing
+    - [ ] Multi-turn conversation workflow validation
+    - [ ] User preference learning accuracy testing
+
+# ========== DEVELOPER SECTIONS (Updated by @dev) ==========
+
+dev_agent_record:
+  agent: 
+  started: 
+  completed: 
+  
+  implementation_notes: |
+    
+  debug_log: |
+    
+  file_list:
+    created: []
+    modified: []
+    deleted: []
+    
+  change_log:
+    - date: 
+      change: 
+      reason:
+
+# ========== QA SECTIONS (Updated by @qa) ==========
+
+qa_results:
+  reviewer: 
+  review_date: 
+  verdict: 
+  
+  test_execution:
+    unit_tests: 
+    integration_tests: 
+    regression_tests: 
+    performance_tests: 
+    
+  architectural_compliance:
+    patterns_followed: 
+    constraints_met: 
+    
+  conversation_validation:
+    understanding_accuracy: 
+    context_preservation: 
+    
+  issues_found:
+    critical: []
+    major: []
+    minor: []
+    
+  improvements_suggested: |
+    
+  final_notes: |

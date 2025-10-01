@@ -1,0 +1,253 @@
+# Story 2.2: Professional Effects Processing  
+# Epic 2 Production Enhancement - Advanced Audio Effects Pipeline
+
+---
+metadata:
+  story_id: story-phase1-enhancement-2-2
+  epic: docs/bmad-development/epics/epic-02-production-enhancement.md
+  phase: phase-1-enhancement
+  created_date: 2024-09-16
+  created_by: Claude Code (Beatrix BMAD SM)
+  size: L
+  priority: P1
+  status: Ready
+
+dependencies:
+  required_stories: ["story-phase1-enhancement-2-1"]
+  external_deps: ["Pedalboard effects library", "Professional audio processing"]
+  
+context:
+  business_value: |
+    Elevates the system from basic synthesis to professional production quality.
+    Users get access to authentic hardcore effects chains that match industry
+    standards for gabber, industrial, and uptempo production.
+    
+    User Impact: "add warehouse reverb" → professional industrial atmosphere
+    "apply Rotterdam distortion" → authentic gabber kick processing
+    This transforms hobby-level output into release-ready professional audio.
+    
+    From Epic 2: Professional effects processing with authentic hardcore chains
+    Creates the EffectsService for industry-standard audio enhancement.
+    
+  epic_relationship: |
+    Story 2.2 builds on 2.1's pattern evolution by adding professional audio
+    processing. Works with Story 2.3 hardware integration for real-time control
+    and prepares foundation for Story 2.4's advanced synthesis engine.
+    
+  current_state: |
+    Epic 1 completed basic audio synthesis and Story 2.1 added pattern evolution.
+    Repository has working MIDIClip generation, AudioService rendering, and
+    EvolutionService. Need professional effects processing to match industry
+    quality for hardcore electronic music production.
+
+requirements:
+  functional: |
+    Professional Effects Processing:
+    - EffectsService with authentic hardcore effects chains
+    - Industry-standard presets: ANGERFIST, HOOVER, WAREHOUSE from CLAUDE.md
+    - Real-time parameter automation and modulation
+    - Effects chain sequencing and parallel processing
+    - Professional mastering chain with proper limiting
+    
+    Hardcore-Specific Processing:
+    - TR-909 kick distortion chains (doorlussen technique)
+    - Alpha Juno hoover processing with chorus and filter resonance
+    - Industrial reverb rumble creation with 3-layer architecture
+    - Sidechain compression for authentic hardcore pumping
+    - Spectral processing for "warmth" vs "coldness" control
+    
+  non_functional:
+    performance: Real-time effects processing <50ms latency
+    quality: Professional-grade effects matching hardware units
+    reliability: Stable processing without audio artifacts
+    usability: Intuitive preset system with parameter control
+    
+architecture:
+  patterns: |
+    From CLAUDE.md Pedalboard Effect Presets:
+    - Use existing ANGERFIST, HOOVER, WAREHOUSE preset implementations
+    - EffectsService implementing clean effects chain architecture
+    - Professional Track-based design: Audio Source → FX Chain → Mixer
+    - Leverage existing AbstractSynthesizer interface patterns
+    
+    From Hardcore Production Knowledge:
+    - Rotterdam gabber distortion chains with mixer overdrive
+    - Industrial 3-layer kick architecture (main + rumble + ghost)
+    - Authentic analog modeling for TR-909 and Alpha Juno processing
+    - Professional mastering with proper limiting and compression
+    
+  components:
+    new: 
+      - src/services/effects_service.py (professional effects processing)
+      - src/effects/ (effects algorithms and presets)
+      - src/presets/hardcore_chains.py (authentic preset definitions)
+      - src/audio/mastering.py (professional mastering chain)
+      - tests/effects/ (audio quality and processing testing)
+    modify:
+      - src/services/audio_service.py (integrate effects processing)
+      - src/audio/ (add effects integration)
+    integrate:
+      - Existing Pedalboard presets from CLAUDE.md
+      - AudioService from Story 3 for effects integration
+      - EvolutionService from Story 2.1 for parameter evolution
+    
+  constraints: |
+    - Effects must maintain hardcore aesthetic and aggressive character
+    - Professional audio quality suitable for mastering and release
+    - Real-time parameter control for live performance capability
+    - No audio artifacts or digital distortion (unless intended)
+    - Industry-standard effect algorithms and processing quality
+    
+  existing_code:
+    leverage: 
+      - Existing Pedalboard effects chains from CLAUDE.md
+      - cli_strudel synthesis and effects processing
+      - Professional hardcore parameters and presets
+      - AudioService integration from completed Story 3
+    avoid:
+      - Academic or experimental effects not suitable for hardcore
+      - CPU-intensive processing that breaks real-time capability
+    refactor:
+      - Consolidate effects processing into clean service architecture
+      - Extract reusable effect algorithms into modular components
+
+acceptance_criteria:
+  - [ ] EffectsService with professional effects chain processing
+  - [ ] Implementation of ANGERFIST, HOOVER, WAREHOUSE presets from CLAUDE.md
+  - [ ] TR-909 kick distortion chains with authentic doorlussen technique
+  - [ ] Industrial reverb rumble with 3-layer architecture
+  - [ ] Sidechain compression for authentic hardcore pumping
+  - [ ] Professional mastering chain with limiting and compression
+  - [ ] Real-time parameter automation and modulation
+  - [ ] Effects chain sequencing and parallel processing
+  - [ ] Integration with existing AudioService and EvolutionService
+  - [ ] Command-line interface for effects control
+  - [ ] Unit tests for all effects algorithms
+  - [ ] Audio quality validation for professional standards
+
+testing:
+  unit_tests:
+    - EffectsService chain processing algorithms
+    - Individual effect parameter validation
+    - Preset loading and parameter mapping
+    - Audio quality metrics and distortion analysis
+    - Performance benchmarking for real-time capability
+    
+  integration_tests:
+    - Effects + AudioService pipeline
+    - Effects + EvolutionService parameter evolution
+    - Professional mastering chain validation
+    - Preset switching and parameter automation
+    
+  validation:
+    audio_quality: Professional-grade processing without artifacts
+    genre_authenticity: Authentic hardcore effects chains
+    performance: Real-time processing capability
+    
+  test_data: |
+    Effects Test Cases:
+    - "apply ANGERFIST preset to gabber kick" → Rotterdam distortion
+    - "add WAREHOUSE reverb to industrial pattern" → atmospheric processing
+    - "use HOOVER preset on acid bassline" → Alpha Juno modeling
+    - "add sidechain compression with 4/4 pumping" → hardcore dynamics
+    - "master this track for release" → professional mastering chain
+    
+    Expected Audio Quality:
+    - Professional dynamics without digital artifacts
+    - Authentic analog modeling of hardware units
+    - Proper frequency response and harmonic content
+    - Industry-standard loudness and dynamic range
+
+dev_notes:
+  implementation_hints: |
+    - Use Pedalboard library for professional-grade effects processing
+    - Implement authentic analog modeling based on CLAUDE.md specifications
+    - Create parameter mapping system for real-time control
+    - Use professional audio standards (32-bit float processing)
+    - Implement proper gain staging throughout effects chains
+    
+  reference_implementations: |
+    - CLAUDE.md Pedalboard effect preset implementations
+    - cli_strudel synthesis and effects processing patterns
+    - Professional mastering techniques from hardcore production
+    - TR-909 and Alpha Juno analog modeling specifications
+    
+  technical_decisions: |
+    - Effects engine: Pedalboard library for professional quality
+    - Processing format: 32-bit float for maximum fidelity
+    - Preset system: YAML-based parameter definitions
+    - Real-time control: OSC protocol for parameter automation
+    - Mastering chain: Industry-standard limiting and compression
+
+tasks:
+  - [ ] Implement EffectsService architecture
+    - [ ] Create EffectsService class with effects chain processing
+    - [ ] Implement professional preset system
+    - [ ] Add real-time parameter control and automation
+    - [ ] Create effects chain sequencing and parallel processing
+  - [ ] Build authentic hardcore effects chains
+    - [ ] Implement ANGERFIST preset with Rotterdam distortion
+    - [ ] Create HOOVER preset with Alpha Juno modeling
+    - [ ] Build WAREHOUSE preset with industrial reverb rumble
+    - [ ] Add TR-909 kick distortion with doorlussen technique
+  - [ ] Create professional mastering system
+    - [ ] Implement professional mastering chain
+    - [ ] Add proper limiting and compression
+    - [ ] Create loudness and dynamic range optimization
+    - [ ] Add spectral processing for "warmth" control
+  - [ ] Testing and audio validation
+    - [ ] Unit tests for all effects algorithms
+    - [ ] Audio quality metrics and analysis
+    - [ ] Professional standards validation
+    - [ ] Performance optimization for real-time capability
+
+# ========== DEVELOPER SECTIONS (Updated by @dev) ==========
+
+dev_agent_record:
+  agent: 
+  started: 
+  completed: 
+  
+  implementation_notes: |
+    
+  debug_log: |
+    
+  file_list:
+    created: []
+    modified: []
+    deleted: []
+    
+  change_log:
+    - date: 
+      change: 
+      reason:
+
+# ========== QA SECTIONS (Updated by @qa) ==========
+
+qa_results:
+  reviewer: 
+  review_date: 
+  verdict: 
+  
+  test_execution:
+    unit_tests: 
+    integration_tests: 
+    regression_tests: 
+    performance_tests: 
+    
+  architectural_compliance:
+    patterns_followed: 
+    constraints_met: 
+    
+  audio_validation:
+    professional_quality: 
+    genre_authenticity: 
+    
+  issues_found:
+    critical: []
+    major: []
+    minor: []
+    
+  improvements_suggested: |
+    
+  final_notes: |

@@ -1,0 +1,253 @@
+# Story 2.3: Hardware Integration Framework
+# Epic 2 Production Enhancement - MIDI Controller and Hardware Integration
+
+---
+metadata:
+  story_id: story-phase1-enhancement-2-3
+  epic: docs/bmad-development/epics/epic-02-production-enhancement.md
+  phase: phase-1-enhancement
+  created_date: 2024-09-16
+  created_by: Claude Code (Beatrix BMAD SM)
+  size: L
+  priority: P2
+  status: Ready
+
+dependencies:
+  required_stories: ["story-phase1-enhancement-2-2"]
+  external_deps: ["MIDI libraries", "Hardware controller mappings"]
+  
+context:
+  business_value: |
+    Transforms the system from software-only into a complete hardware-integrated
+    production environment. Users can control pattern generation, evolution, and
+    effects processing through physical MIDI controllers for live performance.
+    
+    User Impact: Novation Launchpad triggers pattern variations in real-time
+    MIDI Fighter 3D controls effects parameters with motion sensors
+    This enables live hardcore performances and hands-on production workflow.
+    
+    From Epic 2: Hardware integration framework for production controllers
+    Creates the HardwareService for MIDI controller integration.
+    
+  epic_relationship: |
+    Story 2.3 builds on Stories 2.1-2.2 by adding hardware control for pattern
+    evolution and effects processing. Prepares for Story 2.4's advanced synthesis
+    with real-time parameter control from physical hardware.
+    
+  current_state: |
+    Stories 2.1-2.2 completed pattern evolution and professional effects.
+    Repository has working EvolutionService and EffectsService with parameter
+    control. Need hardware integration framework for MIDI controllers to enable
+    live performance and hands-on production workflow.
+
+requirements:
+  functional: |
+    Hardware Integration Framework:
+    - HardwareService for MIDI controller communication
+    - Device-specific mappings for user's hardware setup from CLAUDE.md
+    - Real-time parameter control for evolution and effects
+    - Pattern triggering and performance mode capabilities
+    - Hardware feedback with LED/display updates on controllers
+    
+    Specific Hardware Support (from CLAUDE.md):
+    - Novation Launchpad MK1: 8x8 grid for pattern triggering
+    - DJ TechTools MIDI Fighter 3D: 16 buttons + motion sensors for effects
+    - Novation Launchkey 49: Keys + pads + knobs for parameter control
+    - Novation LaunchControl: 16 knobs + 8 pads for precise tweaking
+    
+  non_functional:
+    performance: MIDI response time <10ms for real-time feel
+    reliability: Stable MIDI communication without dropouts
+    usability: Intuitive controller mappings matching hardware layout
+    scalability: Support for additional controllers via configuration
+    
+architecture:
+  patterns: |
+    From CLAUDE.md Hardware Integration:
+    - HardwareService implementing MIDI controller abstraction
+    - Device-specific mapping system for different controller types
+    - Integration with existing EvolutionService and EffectsService
+    - Real-time parameter automation via MIDI control change messages
+    
+    From Professional DAW Architecture:
+    - Controller abstraction layer for device independence
+    - Parameter mapping system with scaling and curve options
+    - Performance mode for live triggering and control
+    - Hardware feedback system for visual controller updates
+    
+  components:
+    new: 
+      - src/services/hardware_service.py (MIDI controller integration)
+      - src/hardware/ (controller mappings and abstractions)
+      - src/mappings/ (device-specific configuration files)
+      - src/performance/ (live performance mode and pattern triggering)
+      - tests/hardware/ (MIDI integration testing)
+    modify:
+      - src/services/evolution_service.py (add hardware parameter control)
+      - src/services/effects_service.py (add real-time MIDI control)
+      - main.py (add hardware initialization and performance mode)
+    integrate:
+      - EvolutionService from Story 2.1 for real-time evolution
+      - EffectsService from Story 2.2 for parameter automation
+      - Existing cli_shared/hardware/ if available
+    
+  constraints: |
+    - MIDI response must be real-time compatible (<10ms latency)
+    - Hardware mappings must match physical controller layouts
+    - Support for both absolute and relative parameter control
+    - Graceful handling of controller disconnect/reconnect
+    - No interference with existing audio processing pipeline
+    
+  existing_code:
+    leverage: 
+      - Hardware specifications from CLAUDE.md
+      - Existing parameter systems from EvolutionService and EffectsService
+      - cli_shared/hardware/ integration patterns if available
+      - Professional MIDI controller mapping standards
+    avoid:
+      - Generic MIDI mappings that don't match hardware ergonomics
+      - High-latency parameter control that breaks performance flow
+    refactor:
+      - Create modular hardware abstraction system
+      - Extract reusable MIDI utilities for different controller types
+
+acceptance_criteria:
+  - [ ] HardwareService with MIDI controller communication
+  - [ ] Novation Launchpad MK1 mapping for 8x8 pattern triggering
+  - [ ] MIDI Fighter 3D mapping with motion sensor integration
+  - [ ] Launchkey 49 mapping for keys, pads, and knob control
+  - [ ] LaunchControl mapping for precise parameter tweaking
+  - [ ] Real-time parameter control for EvolutionService
+  - [ ] Real-time effects parameter control for EffectsService
+  - [ ] Hardware feedback with LED/display updates
+  - [ ] Performance mode for live pattern triggering
+  - [ ] Controller configuration system for additional devices
+  - [ ] Unit tests for MIDI communication and mapping
+  - [ ] Integration tests for hardware + audio pipeline
+
+testing:
+  unit_tests:
+    - HardwareService MIDI communication protocols
+    - Controller mapping parameter scaling and curves
+    - Device detection and configuration loading
+    - Parameter automation and real-time control
+    - Hardware feedback and visual update systems
+    
+  integration_tests:
+    - Hardware + EvolutionService real-time control
+    - Hardware + EffectsService parameter automation
+    - Performance mode pattern triggering
+    - Multi-controller simultaneous operation
+    
+  validation:
+    latency: MIDI response time under 10ms
+    usability: Intuitive controller mapping workflow
+    reliability: Stable operation with controller connect/disconnect
+    
+  test_data: |
+    Hardware Test Scenarios:
+    - "trigger pattern variations using Launchpad grid" → real-time performance
+    - "control filter cutoff with MIDI Fighter motion" → effects automation
+    - "evolve pattern aggression with Launchkey knobs" → evolution control
+    - "fine-tune reverb parameters with LaunchControl" → precise tweaking
+    - "switch between hardware setups mid-performance" → configuration switching
+    
+    Expected Hardware Behavior:
+    - Immediate response to controller input
+    - Visual feedback on controller displays/LEDs
+    - Smooth parameter curves without stepping
+    - Intuitive mapping matching controller ergonomics
+
+dev_notes:
+  implementation_hints: |
+    - Use python-rtmidi for low-latency MIDI communication
+    - Implement device-specific abstractions with common interface
+    - Create parameter mapping with scaling, curves, and deadzone handling
+    - Use threading for MIDI input without blocking audio processing
+    - Implement hardware feedback with proper LED/display protocols
+    
+  reference_implementations: |
+    - CLAUDE.md hardware specifications and user setup
+    - Professional DAW controller integration patterns
+    - Novation controller protocol documentation
+    - DJ TechTools MIDI Fighter mapping standards
+    
+  technical_decisions: |
+    - MIDI library: python-rtmidi for real-time performance
+    - Mapping system: YAML-based device configuration files
+    - Parameter control: Continuous controller (CC) messages
+    - Hardware feedback: Device-specific LED/display protocols
+    - Performance mode: Non-blocking real-time pattern triggering
+
+tasks:
+  - [ ] Implement HardwareService architecture
+    - [ ] Create HardwareService class with MIDI communication
+    - [ ] Implement device detection and configuration system
+    - [ ] Add parameter mapping with scaling and curves
+    - [ ] Create hardware feedback and visual update system
+  - [ ] Build device-specific mappings
+    - [ ] Implement Novation Launchpad MK1 8x8 grid mapping
+    - [ ] Create MIDI Fighter 3D mapping with motion sensors
+    - [ ] Build Launchkey 49 comprehensive control mapping
+    - [ ] Add LaunchControl precise parameter control
+  - [ ] Create performance mode system
+    - [ ] Implement live pattern triggering
+    - [ ] Add real-time parameter automation
+    - [ ] Create performance workflow optimization
+    - [ ] Add hardware configuration switching
+  - [ ] Testing and integration validation
+    - [ ] Unit tests for all MIDI communication
+    - [ ] Hardware integration testing
+    - [ ] Latency measurement and optimization
+    - [ ] Multi-controller operation validation
+
+# ========== DEVELOPER SECTIONS (Updated by @dev) ==========
+
+dev_agent_record:
+  agent: 
+  started: 
+  completed: 
+  
+  implementation_notes: |
+    
+  debug_log: |
+    
+  file_list:
+    created: []
+    modified: []
+    deleted: []
+    
+  change_log:
+    - date: 
+      change: 
+      reason:
+
+# ========== QA SECTIONS (Updated by @qa) ==========
+
+qa_results:
+  reviewer: 
+  review_date: 
+  verdict: 
+  
+  test_execution:
+    unit_tests: 
+    integration_tests: 
+    regression_tests: 
+    performance_tests: 
+    
+  architectural_compliance:
+    patterns_followed: 
+    constraints_met: 
+    
+  hardware_validation:
+    latency_performance: 
+    mapping_accuracy: 
+    
+  issues_found:
+    critical: []
+    major: []
+    minor: []
+    
+  improvements_suggested: |
+    
+  final_notes: |

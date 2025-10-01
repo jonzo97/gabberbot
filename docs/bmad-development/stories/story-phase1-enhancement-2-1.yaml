@@ -1,0 +1,251 @@
+# Story 2.1: Advanced Pattern Evolution
+# Epic 2 Production Enhancement - Pattern Generation Intelligence
+
+---
+metadata:
+  story_id: story-phase1-enhancement-2-1
+  epic: docs/bmad-development/epics/epic-02-production-enhancement.md
+  phase: phase-1-enhancement
+  created_date: 2024-09-16
+  created_by: Claude Code (Beatrix BMAD SM)
+  size: L
+  priority: P1
+  status: Ready
+
+dependencies:
+  required_stories: ["story-phase1-prototyper-003"]
+  external_deps: ["Pattern evolution algorithms", "Euclidean rhythm libraries"]
+  
+context:
+  business_value: |
+    Transforms the system from basic pattern generation to intelligent musical evolution.
+    Users can now iteratively refine patterns through natural conversation, enabling
+    true "jamming partner" experience for hardcore electronic music production.
+    
+    User Impact: "make it more aggressive" → evolved pattern with heavier distortion
+    "add some euclidean polyrhythms" → mathematically complex rhythm overlays
+    This elevates from basic generation to professional production assistant.
+    
+    From Epic 2: Advanced pattern evolution with conversation-driven refinement
+    Creates intelligent pattern mutation and style evolution capabilities.
+    
+  epic_relationship: |
+    This story builds the foundation for Epic 2's production enhancement focus.
+    It creates the EvolutionService that will be leveraged by Stories 2.2-2.4
+    for advanced effects, hardware integration, and synthesis enhancement.
+    
+  current_state: |
+    Epic 1 delivered basic text-to-audio pipeline with static pattern generation.
+    Repository now has working MIDIClip generation and AudioService rendering.
+    Need to add intelligent pattern evolution, style transfer, and conversational
+    refinement capabilities for professional hardcore music production.
+
+requirements:
+  functional: |
+    Advanced Pattern Evolution:
+    - EvolutionService for iterative pattern refinement
+    - Style transfer between hardcore subgenres (gabber → industrial)
+    - Euclidean rhythm generation and polyrhythm overlays
+    - Pattern mutation with musical intelligence (key preservation, timing)
+    - Conversational evolution: "make it darker", "add more swing"
+    
+    Hardcore Music Intelligence:
+    - Genre-specific evolution rules (150-250 BPM focus)
+    - Authentic hardcore pattern structures and progressions
+    - Kick drum evolution with proper TR-909 analog modeling
+    - Acid bassline evolution with filter automation intelligence
+    
+  non_functional:
+    performance: Pattern evolution <2 seconds per mutation
+    quality: Musically coherent evolution maintaining genre authenticity
+    reliability: Consistent evolution quality across pattern types
+    usability: Intuitive natural language evolution commands
+    
+architecture:
+  patterns: |
+    From CLAUDE.md Professional Architecture:
+    - EvolutionService implementing clean pattern mutation logic
+    - Use existing MIDIClip architecture from Story 3 as foundation
+    - Leverage cli_shared/evolution/ patterns if available
+    - Mathematical rhythm generators for Euclidean patterns
+    
+    From Hardcore Production Knowledge:
+    - TR-909 kick synthesis evolution parameters
+    - Alpha Juno hoover sound evolution chains
+    - Industrial techno atmosphere mutation rules
+    - Rotterdam gabber doorlussen technique variations
+    
+  components:
+    new: 
+      - src/services/evolution_service.py (pattern mutation engine)
+      - src/evolution/ (evolution algorithms and rules)
+      - src/generators/euclidean.py (mathematical rhythm generation)
+      - src/knowledge/hardcore_evolution.py (genre-specific rules)
+      - tests/evolution/ (evolution quality testing)
+    modify:
+      - src/services/generation_service.py (integrate evolution)
+      - main.py (add evolution command interface)
+    integrate:
+      - Existing MIDIClip architecture from Story 3
+      - Hardcore synthesis parameters from CLAUDE.md
+      - cli_shared/evolution/ if available
+    
+  constraints: |
+    - Evolution must preserve musical key and timing relationships
+    - Hardcore aesthetic must be maintained through all mutations
+    - Pattern evolution must be reversible (undo capability)
+    - Genre authenticity: no "softening" unless explicitly requested
+    - Mathematical precision for Euclidean rhythms
+    
+  existing_code:
+    leverage: 
+      - MIDIClip architecture from completed Story 3
+      - Hardcore synthesis parameters from CLAUDE.md
+      - cli_shared/generators/ for pattern generation foundations
+      - AudioService integration for immediate audio feedback
+    avoid:
+      - Academic music theory that conflicts with hardcore aesthetics
+      - Over-quantization that kills groove and swing
+    refactor:
+      - Extract reusable evolution logic into modular components
+      - Create clean interfaces for different evolution types
+
+acceptance_criteria:
+  - [ ] EvolutionService that mutates MIDIClip objects intelligently
+  - [ ] Style transfer between hardcore subgenres (gabber, industrial, uptempo)
+  - [ ] Euclidean rhythm generation with polyrhythm overlays
+  - [ ] Conversational evolution commands ("make it darker", "add swing")
+  - [ ] Pattern mutation preserving musical coherence and key
+  - [ ] Undo/redo system for evolution history tracking
+  - [ ] Genre-specific evolution rules for authentic hardcore sound
+  - [ ] Integration with existing GenerationService and AudioService
+  - [ ] Command-line interface for evolution commands
+  - [ ] Unit tests for all evolution algorithms
+  - [ ] Musical validation for evolved pattern quality
+
+testing:
+  unit_tests:
+    - EvolutionService pattern mutation algorithms
+    - Euclidean rhythm generation accuracy
+    - Style transfer parameter validation
+    - Musical key preservation during evolution
+    - Evolution history tracking and undo functionality
+    
+  integration_tests:
+    - Evolution + AudioService pipeline
+    - Conversational evolution through GenerationService
+    - Pattern evolution quality across multiple iterations
+    - Performance benchmarking for evolution speed
+    
+  validation:
+    musical: Evolved patterns maintain hardcore authenticity
+    technical: Pattern mutations preserve musical relationships
+    user_experience: Intuitive conversational evolution interface
+    
+  test_data: |
+    Evolution Test Cases:
+    - "make this gabber pattern more industrial" → style transfer
+    - "add euclidean polyrhythms, 7 over 16" → mathematical overlay
+    - "make the kick drums more aggressive" → synthesis evolution
+    - "add some swing to the bassline" → timing evolution
+    - "make it darker and more warehouse-like" → atmospheric evolution
+    
+    Expected Evolutionary Behavior:
+    - Preservation of key signature and tempo
+    - Authentic hardcore genre characteristics
+    - Smooth transitions between evolution steps
+    - Reversible mutations with undo capability
+
+dev_notes:
+  implementation_hints: |
+    - Use mathematical algorithms for Euclidean rhythm generation
+    - Implement genre-specific mutation rules based on CLAUDE.md knowledge
+    - Create evolution parameter mapping from natural language descriptions
+    - Use existing MIDIClip metadata for evolution context
+    - Implement evolution history as linked list for efficient undo
+    
+  reference_implementations: |
+    - CLAUDE.md hardcore production parameters for evolution rules
+    - Euclidean rhythm algorithms from computer music literature
+    - cli_shared/generators/ for existing pattern generation patterns
+    - TR-909 synthesis evolution based on analog modeling techniques
+    
+  technical_decisions: |
+    - Evolution engine: Custom hardcore-optimized mutation algorithms
+    - Rhythm generation: Mathematical Euclidean algorithms with swing
+    - Style transfer: Parameter interpolation between genre presets
+    - Undo system: Linked list with pattern snapshots
+    - Natural language parsing: Intent classification for evolution commands
+
+tasks:
+  - [ ] Implement EvolutionService architecture
+    - [ ] Create EvolutionService class with MIDIClip mutation interface
+    - [ ] Implement genre-specific evolution rule system
+    - [ ] Add pattern history tracking with undo/redo
+    - [ ] Create style transfer between hardcore subgenres
+  - [ ] Build mathematical rhythm generators
+    - [ ] Implement Euclidean rhythm algorithm
+    - [ ] Create polyrhythm overlay system
+    - [ ] Add swing and microtiming evolution
+    - [ ] Integrate with existing MIDIClip timing structure
+  - [ ] Create conversational evolution interface
+    - [ ] Natural language parsing for evolution commands
+    - [ ] Integration with existing GenerationService
+    - [ ] Command-line evolution interface in main.py
+    - [ ] Real-time audio feedback during evolution
+  - [ ] Testing and musical validation
+    - [ ] Unit tests for all evolution algorithms
+    - [ ] Musical coherence validation
+    - [ ] Genre authenticity testing
+    - [ ] Performance optimization and benchmarking
+
+# ========== DEVELOPER SECTIONS (Updated by @dev) ==========
+
+dev_agent_record:
+  agent: 
+  started: 
+  completed: 
+  
+  implementation_notes: |
+    
+  debug_log: |
+    
+  file_list:
+    created: []
+    modified: []
+    deleted: []
+    
+  change_log:
+    - date: 
+      change: 
+      reason:
+
+# ========== QA SECTIONS (Updated by @qa) ==========
+
+qa_results:
+  reviewer: 
+  review_date: 
+  verdict: 
+  
+  test_execution:
+    unit_tests: 
+    integration_tests: 
+    regression_tests: 
+    performance_tests: 
+    
+  architectural_compliance:
+    patterns_followed: 
+    constraints_met: 
+    
+  musical_validation:
+    evolution_quality: 
+    genre_authenticity: 
+    
+  issues_found:
+    critical: []
+    major: []
+    minor: []
+    
+  improvements_suggested: |
+    
+  final_notes: |

@@ -1,0 +1,259 @@
+# Story 3.3: Interactive Terminal Interface
+# Epic 3 User Experience & Interface - Professional Terminal-Based Production Environment
+
+---
+metadata:
+  story_id: story-phase1-ux-3-3
+  epic: docs/bmad-development/epics/epic-03-user-experience-interface.md
+  phase: phase-1-ux
+  created_date: 2024-09-16
+  created_by: Claude Code (Beatrix BMAD SM)
+  size: L
+  priority: P1
+  status: Ready
+
+dependencies:
+  required_stories: ["story-phase1-ux-3-2"]
+  external_deps: ["Rich terminal libraries", "Interactive UI components"]
+  
+context:
+  business_value: |
+    Completes the "ChatOps for music production" vision with a professional
+    terminal interface that combines conversational AI, pattern management,
+    and real-time audio control in a unified hardcore production environment.
+    
+    User Impact: Rich terminal interface with real-time waveform display
+    Interactive pattern browser with immediate audio preview
+    This creates the complete hardcore production workstation interface.
+    
+    From Epic 3: Interactive terminal interface completing the user experience
+    Creates the TerminalInterface for professional production workflow.
+    
+  epic_relationship: |
+    Story 3.3 completes Epic 3 by creating the terminal interface that unifies
+    all previous capabilities: conversational AI (3.1) and pattern library (3.2)
+    into a cohesive professional production environment.
+    
+  current_state: |
+    Stories 3.1-3.2 completed conversational AI and pattern library management.
+    Repository has sophisticated ConversationService and LibraryService with
+    comprehensive hardcore production capabilities. Need professional terminal
+    interface to create unified, efficient production workflow.
+
+requirements:
+  functional: |
+    Interactive Terminal Interface:
+    - TerminalInterface with rich, professional terminal-based UI
+    - Real-time conversation display with AI response formatting
+    - Interactive pattern browser with preview and selection
+    - Live audio visualization with waveform and spectrum display
+    - Integrated pattern library access with search and filtering
+    - Hardware controller status display and parameter visualization
+    - Session management with project saving and loading
+    
+    Professional Production Workflow:
+    - Multi-panel interface: conversation, library, hardware, audio
+    - Keyboard shortcuts for common production operations
+    - Context-aware help system with hardcore production tips
+    - Real-time parameter display during hardware control
+    - Audio level monitoring and clip detection
+    - Pattern evolution visualization during conversation-driven changes
+    
+  non_functional:
+    performance: Terminal UI updates <16ms for smooth interaction
+    usability: Intuitive interface matching professional production tools
+    reliability: Stable interface during intensive audio processing
+    accessibility: Clear visual feedback and status information
+    
+architecture:
+  patterns: |
+    From CLAUDE.md Professional Architecture:
+    - TerminalInterface implementing rich terminal-based UI
+    - Integration with all existing services for unified control
+    - Professional production workflow optimization
+    - Real-time data visualization and status monitoring
+    
+    From Professional Terminal Applications:
+    - Rich terminal UI with proper layout management
+    - Interactive components with keyboard and mouse support
+    - Real-time data updates without interface blocking
+    - Context-aware interface state and visual feedback
+    
+  components:
+    new: 
+      - src/interface/terminal_interface.py (rich terminal-based UI)
+      - src/ui/ (interface components and layout management)
+      - src/visualization/ (audio visualization and real-time display)
+      - src/keyboard/ (keyboard shortcuts and interaction handling)
+      - src/session/ (session management and project state)
+      - tests/interface/ (UI functionality and interaction testing)
+    modify:
+      - main.py (integrate comprehensive terminal interface)
+    integrate:
+      - ConversationService from Story 3.1 for AI interaction
+      - LibraryService from Story 3.2 for pattern management
+      - All Epic 2 services for comprehensive production control
+      - Existing hardware integration for real-time status display
+    
+  constraints: |
+    - Terminal interface must be responsive during audio processing
+    - UI must provide clear feedback for all user actions
+    - Interface must scale properly across different terminal sizes
+    - Professional appearance matching hardcore production aesthetic
+    - No blocking operations that freeze the interface
+    
+  existing_code:
+    leverage: 
+      - All existing services for comprehensive system integration
+      - Rich terminal library patterns for professional UI
+      - Professional production workflow from existing codebase
+      - Hardware integration for real-time status display
+    avoid:
+      - Blocking UI operations that freeze during audio processing
+      - Generic terminal interface that doesn't match production workflow
+    refactor:
+      - Enhance existing main.py with comprehensive terminal interface
+      - Extract reusable UI components for different interface modes
+
+acceptance_criteria:
+  - [ ] TerminalInterface with rich, professional terminal-based UI
+  - [ ] Real-time conversation display with AI response formatting
+  - [ ] Interactive pattern browser with preview and selection capabilities
+  - [ ] Live audio visualization with waveform and spectrum display
+  - [ ] Integrated pattern library access with search and filtering
+  - [ ] Hardware controller status display and parameter visualization
+  - [ ] Session management with project saving and loading
+  - [ ] Multi-panel interface with conversation, library, hardware, audio sections
+  - [ ] Keyboard shortcuts for common production operations
+  - [ ] Context-aware help system with hardcore production tips
+  - [ ] Real-time parameter display during hardware control
+  - [ ] Pattern evolution visualization during conversation-driven changes
+  - [ ] Unit tests for all interface components
+  - [ ] Integration tests for complete production workflow
+
+testing:
+  unit_tests:
+    - TerminalInterface component rendering and layout
+    - Interactive pattern browser functionality
+    - Audio visualization accuracy and performance
+    - Keyboard shortcut handling and mapping
+    - Session management and state persistence
+    
+  integration_tests:
+    - Interface + ConversationService AI interaction
+    - Interface + LibraryService pattern management workflow
+    - Interface + all Epic 2 services production pipeline
+    - Real-time hardware integration and status display
+    
+  validation:
+    user_experience: Intuitive interface matching professional production tools
+    performance: Responsive interface during intensive operations
+    workflow_efficiency: Streamlined production workflow optimization
+    
+  test_data: |
+    Interface Test Scenarios:
+    - "conduct complete production session via terminal interface" → workflow validation
+    - "browse pattern library while conversation continues" → multi-tasking capability
+    - "visualize audio while controlling hardware parameters" → real-time integration
+    - "save session state and restore with full context" → session management
+    - "use keyboard shortcuts for rapid pattern manipulation" → efficiency testing
+    
+    Expected Interface Capability:
+    - Professional appearance and workflow efficiency
+    - Real-time responsiveness during audio processing
+    - Intuitive navigation and context-aware help
+    - Comprehensive production control through unified interface
+
+dev_notes:
+  implementation_hints: |
+    - Use Rich library for professional terminal UI with layout management
+    - Implement async UI updates to prevent blocking during audio processing
+    - Create modular UI components for different interface panels
+    - Use proper terminal size detection and responsive layout
+    - Implement efficient audio visualization with downsampling for performance
+    
+  reference_implementations: |
+    - Professional terminal applications (htop, ncurses-based tools)
+    - DAW interface design patterns for production workflow
+    - Rich library examples for advanced terminal UI
+    - Real-time data visualization techniques
+    
+  technical_decisions: |
+    - UI library: Rich for professional terminal interface
+    - Layout system: Responsive panels with automatic sizing
+    - Audio visualization: Real-time with efficient downsampling
+    - Keyboard handling: Comprehensive shortcuts for production efficiency
+    - Session management: JSON-based state with automatic saving
+
+tasks:
+  - [ ] Implement TerminalInterface architecture
+    - [ ] Create TerminalInterface class with rich UI framework
+    - [ ] Implement multi-panel layout with responsive design
+    - [ ] Add real-time conversation display with AI formatting
+    - [ ] Create session management with project state persistence
+  - [ ] Build interactive components
+    - [ ] Implement interactive pattern browser with preview
+    - [ ] Add live audio visualization with waveform and spectrum
+    - [ ] Create hardware controller status display
+    - [ ] Build integrated pattern library access interface
+  - [ ] Create professional workflow features
+    - [ ] Implement keyboard shortcuts for production operations
+    - [ ] Add context-aware help system with hardcore tips
+    - [ ] Create real-time parameter visualization
+    - [ ] Build pattern evolution visualization system
+  - [ ] Testing and workflow validation
+    - [ ] Unit tests for all interface components
+    - [ ] Professional production workflow testing
+    - [ ] Performance optimization for real-time updates
+    - [ ] User experience validation and optimization
+
+# ========== DEVELOPER SECTIONS (Updated by @dev) ==========
+
+dev_agent_record:
+  agent: 
+  started: 
+  completed: 
+  
+  implementation_notes: |
+    
+  debug_log: |
+    
+  file_list:
+    created: []
+    modified: []
+    deleted: []
+    
+  change_log:
+    - date: 
+      change: 
+      reason:
+
+# ========== QA SECTIONS (Updated by @qa) ==========
+
+qa_results:
+  reviewer: 
+  review_date: 
+  verdict: 
+  
+  test_execution:
+    unit_tests: 
+    integration_tests: 
+    regression_tests: 
+    performance_tests: 
+    
+  architectural_compliance:
+    patterns_followed: 
+    constraints_met: 
+    
+  interface_validation:
+    user_experience: 
+    workflow_efficiency: 
+    
+  issues_found:
+    critical: []
+    major: []
+    minor: []
+    
+  improvements_suggested: |
+    
+  final_notes: |

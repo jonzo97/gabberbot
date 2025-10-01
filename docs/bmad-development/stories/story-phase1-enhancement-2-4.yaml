@@ -1,0 +1,256 @@
+# Story 2.4: Advanced Synthesis Engine
+# Epic 2 Production Enhancement - Professional Hardcore Synthesis Architecture
+
+---
+metadata:
+  story_id: story-phase1-enhancement-2-4
+  epic: docs/bmad-development/epics/epic-02-production-enhancement.md
+  phase: phase-1-enhancement
+  created_date: 2024-09-16
+  created_by: Claude Code (Beatrix BMAD SM)
+  size: XL
+  priority: P1
+  status: Ready
+
+dependencies:
+  required_stories: ["story-phase1-enhancement-2-3"]
+  external_deps: ["Advanced synthesis algorithms", "Professional audio processing"]
+  
+context:
+  business_value: |
+    Elevates the system to professional-grade synthesis capable of industry-standard
+    hardcore production. Users get access to authentic TR-909 analog modeling,
+    Alpha Juno hoover synthesis, and advanced FM algorithms for release-quality audio.
+    
+    User Impact: "create authentic gabber kick" → TR-909 analog circuit modeling
+    "generate Rotterdam hoover lead" → Alpha Juno PWM and chorus synthesis
+    This transforms the system into a complete professional synthesis workstation.
+    
+    From Epic 2: Advanced synthesis engine with professional hardcore algorithms
+    Completes the AdvancedSynthesisService for industry-standard audio generation.
+    
+  epic_relationship: |
+    Story 2.4 completes Epic 2 by building the advanced synthesis foundation
+    that leverages all previous components: pattern evolution (2.1), professional
+    effects (2.2), and hardware integration (2.3) for a complete production system.
+    
+  current_state: |
+    Stories 2.1-2.3 completed evolution, effects, and hardware integration.
+    Repository has working pattern manipulation, professional effects chains,
+    and MIDI controller integration. Need advanced synthesis engine to generate
+    professional-quality hardcore audio matching industry standards.
+
+requirements:
+  functional: |
+    Advanced Synthesis Architecture:
+    - AdvancedSynthesisService with professional synthesis algorithms
+    - Authentic TR-909 analog kick drum modeling with circuit simulation
+    - Alpha Juno hoover synthesis with PWM oscillators and analog chorus
+    - Advanced FM synthesis for complex hardcore timbres and acid basslines
+    - Professional sample manipulation with time-stretching and pitch-shifting
+    - Real-time synthesis parameter control via hardware integration
+    
+    Hardcore-Specific Synthesis:
+    - Rotterdam gabber kick synthesis with doorlussen distortion modeling
+    - Industrial techno synthesis with 3-layer architecture and rumble chains
+    - Uptempo hardcore synthesis optimized for 200+ BPM performance
+    - Authentic analog modeling based on CLAUDE.md specifications
+    - Professional dynamics and harmonic content matching hardware units
+    
+  non_functional:
+    performance: Real-time synthesis generation <20ms per voice
+    quality: Professional-grade audio indistinguishable from hardware
+    reliability: Stable synthesis without digital artifacts or aliasing
+    scalability: Support for polyphonic synthesis and multiple concurrent voices
+    
+architecture:
+  patterns: |
+    From CLAUDE.md Professional Architecture:
+    - Use existing AbstractSynthesizer interface for consistency
+    - AdvancedSynthesisService implementing professional synthesis algorithms
+    - Integration with cli_strudel and cli_sc synthesis capabilities
+    - Professional Track-based architecture with modular synthesis components
+    
+    From Hardcore Production Knowledge:
+    - TR-909 analog circuit modeling with proper component simulation
+    - Alpha Juno DCO and PWM synthesis with authentic parameter ranges
+    - Professional FM algorithms optimized for hardcore timbres
+    - Authentic analog modeling preserving harmonic content and dynamics
+    
+  components:
+    new: 
+      - src/services/advanced_synthesis_service.py (professional synthesis engine)
+      - src/synthesis/ (advanced synthesis algorithms and models)
+      - src/models/analog/ (TR-909, Alpha Juno circuit modeling)
+      - src/synthesis/fm/ (advanced FM synthesis algorithms)
+      - src/audio/professional/ (professional audio processing and quality)
+      - tests/synthesis/ (synthesis quality and accuracy testing)
+    modify:
+      - src/services/audio_service.py (integrate advanced synthesis)
+      - src/synthesis/ (enhance existing synthesis capabilities)
+    integrate:
+      - Existing cli_strudel synthesis library
+      - Existing cli_sc SuperCollider integration
+      - HardwareService from Story 2.3 for real-time control
+      - EffectsService from Story 2.2 for processing integration
+    
+  constraints: |
+    - Synthesis must match hardware unit quality and character
+    - Real-time performance for live usage and hardware control
+    - Professional audio standards with proper aliasing prevention
+    - Hardcore aesthetic preservation through all synthesis algorithms
+    - No CPU overload that affects other system components
+    
+  existing_code:
+    leverage: 
+      - cli_strudel synthesis library for FM and effects processing
+      - cli_sc SuperCollider integration for advanced synthesis
+      - CLAUDE.md hardcore synthesis parameters and specifications
+      - AbstractSynthesizer interface for architectural consistency
+    avoid:
+      - Generic synthesis that lacks hardcore character
+      - CPU-intensive algorithms that break real-time performance
+    refactor:
+      - Consolidate synthesis logic into clean service architecture
+      - Extract reusable synthesis components into modular libraries
+
+acceptance_criteria:
+  - [ ] AdvancedSynthesisService with professional synthesis algorithms
+  - [ ] Authentic TR-909 analog kick drum modeling with circuit simulation
+  - [ ] Alpha Juno hoover synthesis with PWM oscillators and analog chorus
+  - [ ] Advanced FM synthesis for complex hardcore timbres
+  - [ ] Professional sample manipulation with time-stretching and pitch-shifting
+  - [ ] Real-time synthesis parameter control via HardwareService integration
+  - [ ] Rotterdam gabber kick synthesis with doorlussen distortion modeling
+  - [ ] Industrial techno synthesis with 3-layer architecture
+  - [ ] Uptempo hardcore synthesis optimized for 200+ BPM performance
+  - [ ] Integration with existing EvolutionService, EffectsService, HardwareService
+  - [ ] Professional audio quality matching hardware standards
+  - [ ] Unit tests for all synthesis algorithms and quality validation
+
+testing:
+  unit_tests:
+    - AdvancedSynthesisService synthesis algorithm accuracy
+    - TR-909 analog modeling circuit simulation validation
+    - Alpha Juno PWM and chorus synthesis parameter testing
+    - FM synthesis algorithm mathematical accuracy
+    - Audio quality metrics and harmonic content analysis
+    
+  integration_tests:
+    - Advanced synthesis + EffectsService pipeline
+    - Synthesis + HardwareService real-time control
+    - Professional audio quality through complete pipeline
+    - Performance benchmarking under heavy synthesis load
+    
+  validation:
+    audio_quality: Professional-grade synthesis matching hardware units
+    performance: Real-time capability with multiple concurrent voices
+    authenticity: Accurate modeling of target hardware characteristics
+    
+  test_data: |
+    Synthesis Test Cases:
+    - "authentic TR-909 kick with analog saturation" → circuit modeling validation
+    - "Alpha Juno hoover lead with PWM and chorus" → analog synthesis accuracy
+    - "complex FM acid bassline with filter automation" → advanced algorithm testing
+    - "Rotterdam gabber kick with doorlussen distortion" → genre-specific modeling
+    - "industrial rumble synthesis with 3-layer architecture" → complex synthesis
+    
+    Expected Synthesis Quality:
+    - Indistinguishable from hardware reference units
+    - Professional harmonic content and dynamics
+    - Authentic analog character and behavior
+    - Real-time performance without artifacts
+
+dev_notes:
+  implementation_hints: |
+    - Use advanced DSP algorithms with proper oversampling for aliasing prevention
+    - Implement authentic analog modeling based on circuit analysis
+    - Create synthesis parameter mapping for real-time hardware control
+    - Use professional audio libraries for high-quality processing
+    - Implement voice allocation and polyphony management
+    
+  reference_implementations: |
+    - cli_strudel synthesis library for existing synthesis patterns
+    - cli_sc SuperCollider integration for advanced synthesis capabilities
+    - CLAUDE.md hardcore synthesis specifications and parameters
+    - Professional analog modeling techniques from audio research
+    
+  technical_decisions: |
+    - Synthesis engine: Custom hardcore-optimized synthesis with analog modeling
+    - Audio processing: 32-bit float with oversampling for quality
+    - Voice allocation: Dynamic polyphony with priority management
+    - Parameter control: Real-time automation via HardwareService integration
+    - Quality assurance: Professional audio standards with harmonic analysis
+
+tasks:
+  - [ ] Implement AdvancedSynthesisService architecture
+    - [ ] Create AdvancedSynthesisService class with professional synthesis
+    - [ ] Implement voice allocation and polyphony management
+    - [ ] Add real-time parameter control integration
+    - [ ] Create synthesis preset system for hardcore styles
+  - [ ] Build authentic analog modeling
+    - [ ] Implement TR-909 analog kick drum circuit simulation
+    - [ ] Create Alpha Juno PWM oscillator and analog chorus modeling
+    - [ ] Add professional dynamics and harmonic content preservation
+    - [ ] Implement authentic parameter ranges and behavior
+  - [ ] Create advanced synthesis algorithms
+    - [ ] Implement advanced FM synthesis for complex timbres
+    - [ ] Add professional sample manipulation capabilities
+    - [ ] Create hardcore-optimized synthesis algorithms
+    - [ ] Implement real-time synthesis with proper performance optimization
+  - [ ] Testing and quality validation
+    - [ ] Unit tests for all synthesis algorithms
+    - [ ] Audio quality validation against hardware references
+    - [ ] Performance optimization and benchmarking
+    - [ ] Integration testing with complete production pipeline
+
+# ========== DEVELOPER SECTIONS (Updated by @dev) ==========
+
+dev_agent_record:
+  agent: 
+  started: 
+  completed: 
+  
+  implementation_notes: |
+    
+  debug_log: |
+    
+  file_list:
+    created: []
+    modified: []
+    deleted: []
+    
+  change_log:
+    - date: 
+      change: 
+      reason:
+
+# ========== QA SECTIONS (Updated by @qa) ==========
+
+qa_results:
+  reviewer: 
+  review_date: 
+  verdict: 
+  
+  test_execution:
+    unit_tests: 
+    integration_tests: 
+    regression_tests: 
+    performance_tests: 
+    
+  architectural_compliance:
+    patterns_followed: 
+    constraints_met: 
+    
+  synthesis_validation:
+    hardware_accuracy: 
+    audio_quality: 
+    
+  issues_found:
+    critical: []
+    major: []
+    minor: []
+    
+  improvements_suggested: |
+    
+  final_notes: |

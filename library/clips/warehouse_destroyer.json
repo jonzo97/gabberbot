@@ -1,0 +1,99 @@
+{
+  "name": "tuned_kicks_pentatonic",
+  "length_bars": 1.0,
+  "time_signature": {
+    "numerator": 4,
+    "denominator": 4
+  },
+  "key_signature": "C",
+  "bpm": 200.0,
+  "notes": [
+    {
+      "pitch": 24,
+      "velocity": 110,
+      "start_time": 0.0,
+      "duration": 0.25,
+      "channel": 9
+    },
+    {
+      "pitch": 24,
+      "velocity": 104,
+      "start_time": 0.25,
+      "duration": 0.25,
+      "channel": 9
+    },
+    {
+      "pitch": 27,
+      "velocity": 115,
+      "start_time": 0.5,
+      "duration": 0.25,
+      "channel": 9
+    },
+    {
+      "pitch": 31,
+      "velocity": 104,
+      "start_time": 1.0,
+      "duration": 0.25,
+      "channel": 9
+    },
+    {
+      "pitch": 36,
+      "velocity": 107,
+      "start_time": 1.25,
+      "duration": 0.25,
+      "channel": 9
+    },
+    {
+      "pitch": 43,
+      "velocity": 113,
+      "start_time": 1.75,
+      "duration": 0.25,
+      "channel": 9
+    },
+    {
+      "pitch": 34,
+      "velocity": 104,
+      "start_time": 2.0,
+      "duration": 0.25,
+      "channel": 9
+    },
+    {
+      "pitch": 34,
+      "velocity": 115,
+      "start_time": 2.5,
+      "duration": 0.25,
+      "channel": 9
+    },
+    {
+      "pitch": 31,
+      "velocity": 116,
+      "start_time": 2.75,
+      "duration": 0.25,
+      "channel": 9
+    },
+    {
+      "pitch": 31,
+      "velocity": 113,
+      "start_time": 3.0,
+      "duration": 0.25,
+      "channel": 9
+    },
+    {
+      "pitch": 51,
+      "velocity": 109,
+      "start_time": 3.75,
+      "duration": 0.25,
+      "channel": 9
+    }
+  ],
+  "created_at": 1757302186.0001185,
+  "tags": [
+    "tuned_kick",
+    "frenchcore",
+    "hardstyle",
+    "kick",
+    "hardcore",
+    "test"
+  ],
+  "genre": "hardcore"
+}

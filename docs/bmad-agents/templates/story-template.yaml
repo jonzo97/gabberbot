@@ -1,0 +1,173 @@
+# Story Template for Hardcore Music Production System
+# This template ensures all stories contain complete context for implementation
+
+---
+metadata:
+  story_id: story-{phase}-{epic}-{sequence}
+  epic: # Link to parent epic file
+  phase: # phase-1-prototyper | phase-2-instrument | phase-3-partner | phase-4-studio
+  created_date: # ISO date
+  created_by: # SM agent name
+  size: # XS (1-2h) | S (2-4h) | M (4-8h) | L (8-16h) | XL (16+h)
+  priority: # P0 (critical) | P1 (high) | P2 (medium) | P3 (low)
+  status: Draft # Draft | Ready | In Progress | In Review | Complete | Blocked
+
+dependencies:
+  required_stories: []  # List of story IDs that must be complete first
+  external_deps: []     # External libraries, tools, or resources needed
+  
+context:
+  business_value: |
+    # Why this story matters from PRD perspective
+    # User persona impact (Devin/Raveena)
+    # Link to PRD section
+    
+  epic_relationship: |
+    # How this contributes to the epic goals
+    # Position in the overall workflow
+    
+  current_state: |
+    # What exists now that this builds on
+    # Existing components to leverage
+
+requirements:
+  functional: |
+    # Specific functionality to implement
+    # From PRD section: {section_reference}
+    
+  non_functional:
+    performance: # Latency, throughput requirements
+    reliability: # Error handling, recovery
+    usability: # User experience requirements
+    
+architecture:
+  patterns: |
+    # Architectural patterns to follow
+    # From Architecture Spec section: {section_reference}
+    
+  components:
+    new: []      # Components to create
+    modify: []   # Existing components to change
+    integrate: [] # Components to connect
+    
+  constraints: |
+    # Technical limitations
+    # Must-follow patterns
+    # Performance boundaries
+    
+  existing_code:
+    leverage: []  # Existing code to use (with file paths)
+    avoid: []     # Deprecated code not to use
+    refactor: []  # Code that needs improvement
+
+acceptance_criteria:
+  - [ ] # Measurable completion criterion 1
+  - [ ] # Measurable completion criterion 2
+  - [ ] # Measurable completion criterion 3
+  # Add all criteria that must be met for story completion
+
+testing:
+  unit_tests:
+    - # Test case description and coverage area
+    
+  integration_tests:
+    - # Component interaction tests
+    
+  validation:
+    musical: # Genre authenticity, audio quality
+    functional: # Feature completeness
+    performance: # Speed, latency requirements
+    
+  test_data: |
+    # Sample inputs, expected outputs
+    # Test prompts for music generation
+    # Audio validation criteria
+
+dev_notes:
+  implementation_hints: |
+    # Suggested approach
+    # Potential gotchas
+    # Performance considerations
+    
+  reference_implementations: |
+    # Similar existing code
+    # Patterns to follow
+    # External examples
+    
+  technical_decisions: |
+    # Pre-made technical choices
+    # Library selections
+    # Algorithm choices
+
+tasks:
+  - [ ] Setup and prerequisites
+    - [ ] # Subtask details
+  - [ ] Core implementation
+    - [ ] # Subtask details
+  - [ ] Testing and validation
+    - [ ] # Subtask details
+  - [ ] Documentation and cleanup
+    - [ ] # Subtask details
+
+# ========== DEVELOPER SECTIONS (Updated by @dev) ==========
+
+dev_agent_record:
+  agent: # Developer agent name
+  started: # ISO timestamp
+  completed: # ISO timestamp
+  
+  implementation_notes: |
+    # Technical decisions made during implementation
+    # Deviations from original plan (with justification)
+    # Challenges encountered and solutions
+    
+  debug_log: |
+    # Issues encountered
+    # Resolution approaches
+    # Performance observations
+    
+  file_list:
+    created: []   # New files created
+    modified: []  # Existing files changed
+    deleted: []   # Files removed
+    
+  change_log:
+    - date: # ISO date
+      change: # Description of change
+      reason: # Why the change was made
+
+# ========== QA SECTIONS (Updated by @qa) ==========
+
+qa_results:
+  reviewer: # QA agent name
+  review_date: # ISO date
+  verdict: # Pass | Fail | Conditional Pass
+  
+  test_execution:
+    unit_tests: # Pass/Fail with coverage %
+    integration_tests: # Pass/Fail with details
+    regression_tests: # Pass/Fail
+    performance_tests: # Metrics and pass/fail
+    
+  architectural_compliance:
+    patterns_followed: # Yes/No with details
+    constraints_met: # Yes/No with details
+    
+  audio_validation:
+    quality: # Assessment of audio output
+    genre_authenticity: # Meets hardcore/gabber standards
+    
+  issues_found:
+    critical: []  # Must fix before acceptance
+    major: []     # Should fix soon
+    minor: []     # Can defer
+    
+  improvements_suggested: |
+    # Code quality improvements
+    # Performance optimizations
+    # Architectural refinements
+    
+  final_notes: |
+    # Overall assessment
+    # Readiness for production
+    # Follow-up recommendations
