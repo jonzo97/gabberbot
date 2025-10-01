@@ -1,0 +1,24 @@
+# Windows line ending configuration for PowerShell migration
+* text=auto
+
+# Shell scripts should use LF (for WSL/Git Bash compatibility)
+*.sh text eol=lf
+*.bash text eol=lf
+
+# Python files use LF
+*.py text eol=lf
+
+# Windows files use CRLF
+*.ps1 text eol=crlf
+*.cmd text eol=crlf
+*.bat text eol=crlf
+
+# Binary files
+*.wav binary
+*.mp3 binary
+*.ogg binary
+*.flac binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
