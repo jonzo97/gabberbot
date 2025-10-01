@@ -5,7 +5,7 @@ Chat-style display of conversation history between user and AI assistant.
 """
 
 from textual.app import ComposeResult
-from textual.widgets import Static, ScrollableContainer
+from textual.widgets import Static
 from textual.containers import VerticalScroll
 from rich.text import Text
 from datetime import datetime
@@ -14,7 +14,7 @@ from ..models.session_state import SessionState, ConversationMessage, MessageRol
 from ..utils import theme
 
 
-class ConversationPanel(ScrollableContainer):
+class ConversationPanel(VerticalScroll):
     """
     Scrollable panel displaying conversation history.
 
