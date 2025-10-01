@@ -157,8 +157,9 @@ class SessionController:
             audio_filename = f"{track_id}.wav"
             audio_path = self.output_dir / audio_filename
 
-            # Render MIDI to WAV
-            output_path = self.audio_service.render_to_wav(
+            # Render MIDI to WAV (run in thread to avoid blocking)
+            output_path = await asyncio.to_thread(
+                self.audio_service.render_to_wav,
                 clip=midi_clip,
                 output_path=audio_path
             )
