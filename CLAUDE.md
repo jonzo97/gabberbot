@@ -15,131 +15,87 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Target User
 Electronic music producers working in underground genres who value speed over perfection and appreciate aggressive aesthetics.
 
-## BMAD Agent System (MANDATORY WORKFLOW)
+## BMAD Development Workflow
 
-### BMAD Music Production Expansion Pack
+This project uses the **BMAD (Better Method for AI Development)** methodology for systematic software development through specialized agents.
 
-**CRITICAL**: This project now uses a comprehensive BMAD music production expansion pack with specialized agents. ALL music production work MUST use these specialized agents:
+### Development Agents (BMAD Commands)
 
-### ⚠️ MANDATORY TASK TOOL INVOCATION PROTOCOL ⚠️
+BMAD agents are invoked using `/command` syntax:
 
-**CORE BMAD PRINCIPLE**: Agents do the work, humans orchestrate.
+**Core Development Team:**
+- `/sm` - Scrum Master: Create stories from epics, manage sprint planning
+- `/dev` - Developer: Implement stories following architecture patterns
+- `/qa` - QA Engineer: Validate implementations, run tests, quality gates
+- `/architect` - Architect: Architectural guidance and design decisions
+- `/analyst` - Business Analyst: Requirements analysis and research
 
-**VIOLATION ALERT**: Previous work on this project violated BMAD methodology by doing manual work instead of using the Task tool for agent invocation. This is forbidden and leads to poor quality, inconsistent results, and wasted time.
+**Management & Coordination:**
+- `/pm` - Project Manager: Project management and coordination
+- `/po` - Product Owner: Product validation and epic management
+- `/bmad-orchestrator` - Coordinates complex multi-agent workflows
+- `/bmad-master` - High-level project oversight
 
-#### MANDATORY AGENT INVOCATION RULES:
-
-1. **NEVER DO AGENT WORK MANUALLY** - If an agent exists for a task, you MUST use the Task tool to invoke it
-2. **TASK TOOL FIRST** - Before any music production work, invoke appropriate agents via Task tool
-3. **NO EXCEPTIONS** - Manual work bypassing agents is a critical methodology violation
-4. **AGENT VALIDATION** - All content must be created/validated by agents, not humans
-
-#### CORRECT BMAD WORKFLOW:
-```bash
-# CORRECT (MANDATORY):
-Task tool → Invoke @agent → Agent provides output → Refine if needed
-
-# WRONG (FORBIDDEN):
-Manual work → Complete task without agents
+**Example Usage:**
+```
+> /sm create next story from epic-01-prototyper
+> /dev implement story-phase1-prototyper-001.yaml
+> /qa review story-phase1-prototyper-001.yaml
 ```
 
-#### Music Production Agents
+**IMPORTANT:** For complex features, use BMAD agents systematically rather than implementing manually. The agents have full context of your planning docs and architecture.
 
-1. **@music-producer (Raven)**
-   - **Personality**: Creative visionary with relentless drive
-   - **Specialties**: Track composition, pattern generation, creative direction
-   - **Commands**: 17 specialized commands for unlimited generative systems
+### BMAD Workflow (Systematic Development)
 
-2. **@sound-designer (Void)**
-   - **Personality**: Sonic alchemist obsessed with spectral manipulation
-   - **Specialties**: Synthesis mastery, spectral processing, sound design
-   - **Commands**: 18 specialized commands for advanced synthesis techniques
+```
+1. Story Creation (sm agent)
+   ↓
+   Epic → Planning Docs → Story YAML file
 
-3. **@mix-engineer (Phoenix)**
-   - **Personality**: Perfectionist with warehouse sound obsession
-   - **Specialties**: Professional mixing, mastering, acoustic optimization
-   - **Commands**: 18 specialized commands for warehouse-optimized mixing
+2. Implementation (dev agent)
+   ↓
+   Story → Code + Tests → Ready for Review
 
-4. **@music-analyst (Nexus)**
-   - **Personality**: Pattern recognition savant
-   - **Specialties**: Genre analysis, pattern extraction, intelligence gathering
-   - **Commands**: 17 specialized commands for deep music analysis
+3. Quality Validation (qa agent)
+   ↓
+   Review → Tests → Verdict (PASS/FAIL)
 
-5. **@theory-engine (Cipher)**
-   - **Personality**: Mathematical music theorist
-   - **Specialties**: Harmonic analysis, rhythmic intelligence, music theory
-   - **Commands**: 18 specialized commands for comprehensive theory analysis
-
-6. **@innovation-lab (Flux)**
-   - **Personality**: Boundary-pushing experimenter
-   - **Specialties**: Experimental techniques, genre fusion, technology integration
-   - **Commands**: 18 specialized commands for experimental sound design
-
-7. **@music-orchestrator (Conductor)**
-   - **Personality**: Strategic team coordinator
-   - **Specialties**: Workflow management, team coordination, project leadership
-   - **Commands**: BMAD integration with sophisticated pushback mechanisms
-
-8. **@music-analyst-specialist (Archive)**
-   - **Personality**: Intelligence preservation specialist
-   - **Specialties**: Research extraction, knowledge crystallization
-   - **Commands**: Specialized for research intelligence extraction
-
-9. **@music-archivist (Keeper)**
-   - **Personality**: Knowledge organization master
-   - **Specialties**: Knowledge base management, information retrieval
-   - **Commands**: Advanced knowledge organization and retrieval systems
-
-#### BMAD Music Production Workflow (MANDATORY)
-
-```bash
-# Use @music-orchestrator to coordinate teams
-@music-orchestrator → Assemble appropriate team for task
-                   → Coordinate workflow execution
-                   → Manage team pushback mechanisms
-
-# Example: Track Production
-@music-orchestrator → Assemble Full Production Team
-@music-producer    → Creative direction and composition
-@sound-designer    → Synthesis and sound design
-@mix-engineer      → Professional mixing and mastering
-
-# Example: Analysis Task
-@music-orchestrator → Assemble Analysis Team  
-@music-analyst     → Pattern recognition and genre analysis
-@theory-engine     → Harmonic and rhythmic analysis
-@music-archivist   → Knowledge preservation
+4. Iterate until complete
 ```
 
-#### Agent Infrastructure Location
+### Planning Documentation Structure
 
-All agents and supporting infrastructure are located in:
 ```
-BMAD-AT-CLAUDE/expansion-packs/bmad-music-production/
-├── config.yaml         # BMAD expansion pack configuration
-├── agents/             # 9 specialized music production agents
-├── agent-teams/        # 3 team coordination bundles
-├── workflows/          # 4 comprehensive workflow YAML definitions
-├── tasks/             # Comprehensive task libraries for all agents
-├── templates/         # Production templates (basslines, leads, arrangements, mixing)
-└── data/              # Synthesis parameters, research intelligence archive
+docs/
+├── bmad-planning/           # Project planning docs
+│   ├── 01-project-brief.md        # Business analysis
+│   ├── 02-architecture-spec.md    # Technical architecture (AUTHORITATIVE)
+│   ├── 03-prd.md                  # Product requirements
+│   ├── 04-po-validation.md        # Phased roadmap
+│   └── context-files/             # Current state, decisions, tech debt
+├── bmad-development/        # Development artifacts
+│   ├── epics/                     # Epic definitions
+│   └── stories/                   # Story YAML files
+└── bmad-agents/            # Original agent definitions (reference)
 ```
 
-#### Team Coordination Bundles
+### Using Agents for Complex Work
 
-Use these pre-configured teams for common workflows:
-- **hardcore-music-team.yaml**: Full production team (Producer, Designer, Engineer, Analyst)
-- **analysis-intelligence-team.yaml**: Analysis and research team (Analyst, Theory, Archive, Keeper)
-- **innovation-research-team.yaml**: Experimental research team (Innovation, Designer, Archive, Theory)
+**For multi-step features:**
+```
+> Use the sm agent to analyze the current codebase drift and create a story for fixing architecture violations
 
-#### BMAD Agent Rules
+> Use the dev agent to implement the architecture fix story
 
-- **MANDATORY: Use Task tool for ALL agent invocation**
-- **ALWAYS use @music-orchestrator for team coordination**
-- **Use team bundles for multi-agent workflows**
-- **Follow workflow YAML definitions for complex tasks**
-- **Leverage comprehensive template and task libraries**
-- **Validate all work through agents, never manual creation**
+> Use the qa agent to validate the implementation meets requirements
+```
+
+**Agent Benefits:**
+- Systematic approach to complex tasks
+- Complete context from planning docs
+- Consistent quality through defined workflows
+- Clear handoffs between phases
+- Documentation built into process
 
 ## Technical Architecture
 

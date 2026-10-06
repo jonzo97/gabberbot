@@ -1,0 +1,87 @@
+# Story 4: Data Model Migration to Story 001
+# Epic: Architecture Realignment & Technical Debt Cleanup
+
+---
+metadata:
+  story_id: story-phase1-consolidation-004-data-models
+  epic: docs/bmad-development/epics/epic-phase1-consolidation.md
+  phase: phase-1-consolidation
+  created_date: 2025-10-01
+  created_by: John (PM Agent)
+  size: L
+  priority: P0
+  status: Ready for Development
+
+dependencies:
+  required_stories:
+    - "story-phase1-consolidation-001-tempo-fix"
+    - "story-phase1-consolidation-002-strategy-doc"
+  external_deps: ["src/models/core.py (Story 001)"]
+  can_parallel: ["story-phase1-consolidation-003-constants"]
+
+context:
+  business_value: |
+    Foundation Standardization: Experimental files bypass Story 001 Pydantic models, using
+    custom data structures instead. This violates Story 001's core acceptance criterion and
+    prevents type safety, validation, and JSON serialization.
+
+    From Risk Assessment TECH-002: "Data model bypass - Story 001 models ignored. Consolidation
+    requires rewriting all data handling or abandoning Story 001 models."
+
+  epic_relationship: |
+    Implements Epic Story 4: Data Model Migration. Establishes consistent data structures
+    before Story 5 (Implementation Consolidation).
+
+requirements:
+  functional: |
+    - Migrate all custom data structures to Story 001 Pydantic models
+    - Extend Story 001 models if needed for experimental features
+    - Create migration utilities (custom → Story 001)
+    - Validate all MIDI ranges (0-127), timing constraints
+    - Ensure JSON serialization works for all models
+
+  non_functional:
+    reliability: Type safety prevents invalid MIDI data
+    performance: Model validation <1ms (Story 001 standard)
+    maintainability: Single model system across all code
+
+acceptance_criteria:
+  - [ ] Story 001 models extended: Support all experimental use cases
+  - [ ] Migration utilities: Automated conversion from custom models
+  - [ ] All experimental files migrated: Use Story 001 Pydantic models
+  - [ ] All Story 001 tests pass: 37/37 unit tests
+  - [ ] New migration tests pass: Validate conversion correctness
+  - [ ] Type validation works: mypy passes on all migrated code
+  - [ ] JSON serialization works: All models serialize/deserialize
+  - [ ] No functionality broken: Generated music unchanged
+
+testing:
+  unit_tests:
+    - Model validation (MIDI ranges, timing constraints)
+    - Migration utility correctness
+    - JSON serialization round-trip
+    - Type hint validation (mypy)
+
+  integration_tests:
+    - Complete pattern generation with Story 001 models
+    - Audio rendering with migrated models
+    - Feature parity (experimental vs migrated)
+
+tasks:
+  - [ ] Audit custom models in experimental files
+  - [ ] Extend Story 001 models for missing features
+  - [ ] Create migration utilities
+  - [ ] Migrate experimental files (one at a time)
+  - [ ] Validate migrations with tests
+  - [ ] Update all imports to Story 001 models
+
+# ========== DEVELOPER & QA SECTIONS ==========
+dev_agent_record:
+  agent:
+  started:
+  completed:
+
+qa_results:
+  reviewer:
+  review_date:
+  verdict:

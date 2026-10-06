@@ -1,0 +1,162 @@
+# Story 6: Integration Validation & Golden Master Tests
+# Epic: Architecture Realignment & Technical Debt Cleanup
+
+---
+metadata:
+  story_id: story-phase1-consolidation-006-validation
+  epic: docs/bmad-development/epics/epic-phase1-consolidation.md
+  phase: phase-1-consolidation
+  created_date: 2025-10-01
+  created_by: John (PM Agent)
+  size: M
+  priority: P0-GATE
+  status: Ready for Development
+
+dependencies:
+  required_stories:
+    - "story-phase1-consolidation-001-tempo-fix"
+    - "story-phase1-consolidation-002-strategy-doc"
+    - "story-phase1-consolidation-003-constants"
+    - "story-phase1-consolidation-004-data-models"
+    - "story-phase1-consolidation-005-implementation"
+  external_deps: ["Golden master baseline from Story 1"]
+
+context:
+  business_value: |
+    Final Quality Gate: Validate consolidated system maintains quality, performance, and all
+    features from experimental code. This is the MANDATORY gate before merging to main and
+    proceeding to Phase 2.
+
+    From Risk Assessment BUS-001: "Loss of working functionality is critical risk. Golden
+    master tests ensure consolidation preserved all capabilities."
+
+  epic_relationship: |
+    Implements Epic Story 6: Final Validation. MUST pass before epic completion and merge
+    to main. Blocks Phase 2 development until validation passes.
+
+requirements:
+  functional: |
+    - Run full 30-minute production test
+    - Compare to baseline (83 sessions, 1660 patterns)
+    - Validate tempo accuracy (from Story 1 fix)
+    - Validate audio quality (golden master comparison)
+    - Validate feature parity (all experimental features work)
+    - Validate performance (within 10% of baseline)
+
+  non_functional:
+    reliability: All tests must pass before merge
+    performance: <3.85s per session (3.5s + 10%)
+    quality: >95% similarity to golden master audio
+
+acceptance_criteria:
+  - [ ] 30-minute production run: 80+ sessions generated
+  - [ ] Pattern count: 1600+ patterns (within 5% of baseline)
+  - [ ] Tempo accuracy: All music at correct tempo
+  - [ ] Golden master tests: >95% audio similarity
+  - [ ] Performance validation: Generation speed <3.85s/session
+  - [ ] Story 001 tests: All 37 tests pass
+  - [ ] Migration tests: All new tests pass
+  - [ ] Feature parity: All experimental features operational
+  - [ ] Zero regressions: No functionality broken
+  - [ ] Code quality: Zero hardcoded values, all Story 001 models
+
+testing:
+  golden_master_tests:
+    - Spectral analysis (frequency content comparison)
+    - RMS comparison (loudness matching)
+    - Waveform correlation (shape similarity)
+    - Human listening validation
+
+  performance_tests:
+    - Session generation speed
+    - Memory usage
+    - Batch generation throughput
+
+  regression_tests:
+    - All Story 001 tests (37/37)
+    - Tempo accuracy tests
+    - Constants audio regression
+    - Model validation tests
+
+  feature_parity_tests:
+    - Album generation
+    - DJ export
+    - QA suite functions
+    - Performance monitoring
+    - All experimental features
+
+tasks:
+  - [ ] Run 30-minute production test
+  - [ ] Execute golden master validation
+  - [ ] Run performance benchmarks
+  - [ ] Execute all test suites
+  - [ ] Validate feature parity
+  - [ ] Human listening validation
+  - [ ] Document validation results
+  - [ ] Obtain QA approval for merge
+
+# ========== DEVELOPER & QA SECTIONS ==========
+dev_agent_record:
+  agent:
+  started:
+  completed:
+
+  validation_results: |
+    30-Minute Production Run:
+    - Sessions: [count] (baseline: 83)
+    - Patterns: [count] (baseline: 1660)
+    - Avg time/session: [seconds] (baseline: 3.5s)
+
+    Performance Metrics:
+    - Generation speed: [comparison to baseline]
+    - Memory usage: [comparison to baseline]
+
+qa_results:
+  reviewer: Casey (QA Agent)
+  review_date:
+  verdict: [APPROVED/NEEDS_FIXES]
+
+  golden_master_validation:
+    spectral_similarity:
+    rms_difference:
+    waveform_correlation:
+    human_validation:
+
+  test_suite_results:
+    story_001_tests: [37/37 or failures]
+    tempo_accuracy_tests:
+    constants_regression_tests:
+    model_validation_tests:
+    migration_tests:
+
+  performance_validation:
+    generation_speed:
+    memory_usage:
+    throughput:
+
+  feature_parity_validation:
+    album_generation:
+    dj_export:
+    qa_suite:
+    performance_monitoring:
+    experimental_features:
+
+  regression_analysis:
+    critical_regressions: []
+    major_regressions: []
+    minor_regressions: []
+
+  gate_decision: |
+    FINAL EPIC GATE CRITERIA:
+    - [ ] All critical risks mitigated (5/5)
+    - [ ] Golden master tests pass (>95%)
+    - [ ] Performance within 10% (PASS/FAIL)
+    - [ ] 30-minute test matches baseline (PASS/FAIL)
+    - [ ] Zero hardcoded values (PASS/FAIL)
+    - [ ] All Story 001 tests pass (37/37)
+    - [ ] Feature parity validated (PASS/FAIL)
+
+    FINAL DECISION: [APPROVE MERGE / REQUEST FIXES]
+
+    If APPROVE: Epic complete, ready for Phase 2
+    If REQUEST FIXES: [list required fixes]

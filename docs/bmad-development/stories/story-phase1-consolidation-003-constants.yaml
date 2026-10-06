@@ -1,0 +1,338 @@
+# Story 3: Constants Extraction & Hardcoded Value Elimination
+# Epic: Architecture Realignment & Technical Debt Cleanup
+
+---
+metadata:
+  story_id: story-phase1-consolidation-003-constants
+  epic: docs/bmad-development/epics/epic-phase1-consolidation.md
+  phase: phase-1-consolidation
+  created_date: 2025-10-01
+  created_by: John (PM Agent)
+  size: M
+  priority: P0
+  status: Ready for Development
+
+dependencies:
+  required_stories:
+    - "story-phase1-consolidation-001-tempo-fix"
+    - "story-phase1-consolidation-002-strategy-doc"
+  external_deps: ["audio/parameters/synthesis_constants.py"]
+  can_parallel: ["story-phase1-consolidation-004-data-models"]
+
+context:
+  business_value: |
+    Code Quality Foundation: Experimental files contain 18+ hardcoded synthesis parameters
+    (BPM, frequencies, distortion amounts) instead of using the centralized synthesis_constants.py.
+    This creates inconsistent sound across code paths and makes parameter tuning impossible without
+    code changes.
+
+    User Impact: Different code paths produce different sound quality. Users get Rotterdam Gabber
+    from one path, but different characteristics from another path, even with same settings.
+    Professional parameter tuning (user-validated KICK_SUB_FREQS, DETUNE_CENTS) is bypassed.
+
+    From Risk Assessment TECH-003: "Hardcoded synthesis parameters everywhere - violates CLAUDE.md
+    mandate 'NO MORE MAGIC NUMBERS'. Creates inconsistent sound and makes tuning impossible."
+
+  epic_relationship: |
+    This story implements Epic Story 3: Constants Extraction. It can be executed in parallel
+    with Story 4 (Data Model Migration) as they modify different aspects of the code.
+
+    Establishes consistent synthesis parameters before Story 5 (Implementation Consolidation)
+    to ensure unified sound quality across consolidated system.
+
+  current_state: |
+    Hardcoded Values Inventory (from Risk Assessment):
+
+    bmad_standalone.py:
+    - Line 579: frequency = 440.0 * (2 ** ((pitch - 69) / 12.0))
+      Should use: MIDIConstants.MIDI_A4_FREQ, MIDIConstants.MIDI_A4_NOTE
+    - Line 770: processed = self._apply_distortion(processed, amount=0.2)
+      Should use: HardcoreConstants.HARDCORE_DISTORTION_DB or style presets
+
+    bmad_coordinator_lite.py:
+    - Line 194: frequency = 60.0  # Base kick frequency
+      Should use: HardcoreConstants.KICK_SUB_FREQS[0]
+    - Multiple instances: BPM=180.0
+      Should use: config.bpm or style preset BPM
+
+    bmad_simple_test.py:
+    - Hardcoded frequency calculations
+    - Hardcoded BPM defaults
+    - Magic distortion amounts
+
+    Existing Proper Constants (audio/parameters/synthesis_constants.py):
+    - HardcoreConstants.KICK_SUB_FREQS = [41.2, 82.4, 123.6] (USER VALIDATED)
+    - HardcoreConstants.DETUNE_CENTS = [-19, -10, -5, 0, 5, 10, 19, 29] (USER VALIDATED)
+    - HardcoreConstants.HARDCORE_DISTORTION_DB = 15 (USER VALIDATED)
+    - HARDCORE_STYLE_PRESETS with 6 complete style definitions
+    - MIDIConstants.MIDI_A4_FREQ = 440.0
+    - MIDIConstants.MIDI_A4_NOTE = 69
+
+requirements:
+  functional: |
+    From Risk Assessment - Story 3 Requirements:
+    - Catalog every hardcoded value in bmad_*.py files
+    - Map each hardcoded value to existing synthesis_constants.py entry
+    - Identify gaps (values not in synthesis_constants.py) and add them
+    - Replace all magic numbers with constant references
+    - Validate audio output unchanged after constant replacement
+
+    From Epic Definition of Done:
+    - Zero hardcoded synthesis parameters in consolidated code
+    - All synthesis parameters from synthesis_constants.py
+    - Audio regression tests pass (sound quality maintained)
+
+  non_functional:
+    performance: Constants refactoring must not degrade performance
+    reliability: Audio output must remain identical after refactoring
+    maintainability: All synthesis parameters centralized for easy tuning
+
+architecture:
+  patterns: |
+    Constant Reference Patterns:
+    - Import: from audio.parameters.synthesis_constants import HardcoreConstants, MIDIConstants
+    - Usage: frequency = MIDIConstants.MIDI_A4_FREQ * (2 ** ((pitch - MIDIConstants.MIDI_A4_NOTE) / 12.0))
+    - Style Presets: preset = HARDCORE_STYLE_PRESETS[HardcoreStyle.ROTTERDAM_GABBER]
+
+    Refactoring Approach:
+    - File-by-file systematic replacement
+    - One category at a time (frequency, BPM, distortion, etc.)
+    - Audio regression test after each file
+    - Validate no sound quality change
+
+  components:
+    modify:
+      - ALL 17 bmad_*.py files (hardcoded value replacement)
+      - audio/parameters/synthesis_constants.py (add missing constants if needed)
+    create:
+      - tests/integration/test_constants_audio_regression.py (validation)
+    preserve:
+      - Exact audio output (no quality changes permitted)
+
+  constraints: |
+    - Must maintain exact audio output (bit-perfect if possible, <1% difference allowed)
+    - Cannot break existing functionality during refactoring
+    - All constants must have clear names and documentation
+    - User-validated constants (KICK_SUB_FREQS, etc.) must not change
+
+  existing_code:
+    leverage:
+      - audio/parameters/synthesis_constants.py (complete constant library)
+      - Story 001 test infrastructure for validation
+      - Golden master audio files from Story 1
+    refactor:
+      - All hardcoded frequency calculations
+      - All hardcoded BPM values
+      - All hardcoded distortion amounts
+      - All magic numbers in synthesis code
+
+acceptance_criteria:
+  - [ ] Hardcoded value inventory: All magic numbers cataloged and mapped
+  - [ ] Constants gap analysis: Missing constants identified and added to synthesis_constants.py
+  - [ ] File 1 refactored: bmad_standalone.py uses constants, audio regression pass
+  - [ ] File 2 refactored: bmad_coordinator_lite.py uses constants, audio regression pass
+  - [ ] File 3 refactored: bmad_simple_test.py uses constants, audio regression pass
+  - [ ] Files 4-17 refactored: All experimental files use constants
+  - [ ] Zero magic numbers: Grep for common patterns finds no hardcoded values
+  - [ ] Audio regression: Generated audio identical to pre-refactoring baseline
+  - [ ] Style consistency: All Rotterdam Gabber code uses same preset
+  - [ ] Documentation: All new constants documented with units and rationale
+
+testing:
+  unit_tests:
+    - Constant value validation (verify expected values)
+    - Constant import tests (all modules can import)
+    - Calculation tests (formulas using constants produce correct results)
+
+  integration_tests:
+    - Audio regression per file (before/after refactoring)
+    - Multi-file audio regression (complete generation pipeline)
+    - Style preset consistency (all Rotterdam Gabber sounds identical)
+    - BPM accuracy (constants don't break tempo fix from Story 1)
+
+  validation:
+    musical: Generated patterns sound identical before/after
+    functional: All calculations produce same results
+    performance: No degradation from constant lookups
+    consistency: Same style = same sound across all code paths
+
+  test_data: |
+    Regression Test Patterns:
+    - Rotterdam Gabber kick (uses KICK_SUB_FREQS)
+    - Acid bassline (uses DETUNE_CENTS)
+    - Full track (uses complete style preset)
+
+    Validation Methods:
+    - Spectral analysis (frequency content unchanged)
+    - RMS comparison (loudness unchanged)
+    - Waveform correlation (shape unchanged)
+    - Human listening (sounds identical)
+
+dev_notes:
+  implementation_hints: |
+    Constants Catalog Template:
+    ```python
+    # Hardcoded Value Inventory
+    # File: bmad_standalone.py
+
+    HARDCODED_FREQUENCIES:
+      - Line 579: 440.0 → MIDIConstants.MIDI_A4_FREQ
+      - Line 579: 69 → MIDIConstants.MIDI_A4_NOTE
+      - Line 194: 60.0 → HardcoreConstants.KICK_SUB_FREQS[0]
+
+    HARDCODED_BPM:
+      - Line 123: 180.0 → config.bpm or preset.default_bpm
+      - Line 456: 120.0 → config.bpm or DEFAULT_BPM constant
+
+    HARDCODED_DISTORTION:
+      - Line 770: 0.2 → HardcoreConstants.HARDCORE_DISTORTION_DB / 100.0
+      - Line 802: 0.3 → preset.brutality
+    ```
+
+    Refactoring Workflow:
+    1. Audit file for all magic numbers
+    2. Map each to constant or add to synthesis_constants.py
+    3. Replace magic numbers with constant references
+    4. Run audio regression test
+    5. If test fails, investigate and fix
+    6. If test passes, commit and move to next file
+
+  reference_implementations: |
+    Correct Constant Usage (from synthesis_constants.py):
+    ```python
+    # MIDI frequency calculation
+    from audio.parameters.synthesis_constants import MIDIConstants
+
+    def midi_to_frequency(midi_note: int) -> float:
+        return MIDIConstants.MIDI_A4_FREQ * (
+            2 ** ((midi_note - MIDIConstants.MIDI_A4_NOTE) / 12.0)
+        )
+
+    # Hardcore kick synthesis
+    from audio.parameters.synthesis_constants import HardcoreConstants
+
+    kick_freqs = HardcoreConstants.KICK_SUB_FREQS  # [41.2, 82.4, 123.6]
+    detune = HardcoreConstants.DETUNE_CENTS
+    distortion = HardcoreConstants.HARDCORE_DISTORTION_DB
+
+    # Style preset usage
+    from audio.parameters.synthesis_constants import HARDCORE_STYLE_PRESETS, HardcoreStyle
+
+    preset = HARDCORE_STYLE_PRESETS[HardcoreStyle.ROTTERDAM_GABBER]
+    # preset.frequency, preset.brutality, etc. all user-validated
+    ```
+
+  technical_decisions: |
+    Decision 1: Audio Regression Tolerance
+    - Target: Bit-perfect identical audio output
+    - Acceptable: <1% RMS difference, <5% spectral centroid difference
+    - Rationale: Floating-point rounding may cause tiny differences
+
+    Decision 2: Constant Naming Convention
+    - Pattern: CATEGORY_SUBCATEGORY_UNIT (e.g., KICK_SUB_FREQS_HZ)
+    - Units: Always include in constant name or docstring
+    - Rationale: Clear intent, prevents unit confusion
+
+    Decision 3: Missing Constants Handling
+    - Add to synthesis_constants.py if reused >2 times
+    - Document rationale and source (user validated, measured, calculated)
+    - Group related constants (e.g., all kick parameters together)
+
+tasks:
+  - [ ] Create hardcoded value inventory
+    - [ ] Grep for common patterns: [0-9]+\.[0-9]+ (floats)
+    - [ ] Grep for BPM assignments: bpm\s*=\s*[0-9]+
+    - [ ] Grep for frequency: frequency\s*=\s*[0-9]+
+    - [ ] Manual code review for magic numbers
+    - [ ] Catalog all findings with file:line:value:purpose
+  - [ ] Map to existing constants
+    - [ ] Match frequencies to MIDIConstants or HardcoreConstants
+    - [ ] Match BPM to style presets or config
+    - [ ] Match distortion to HardcoreConstants
+    - [ ] Identify gaps (values not in synthesis_constants.py)
+  - [ ] Add missing constants
+    - [ ] Add to appropriate section of synthesis_constants.py
+    - [ ] Document units and rationale
+    - [ ] Add validation if needed (e.g., range checks)
+    - [ ] Update synthesis_constants.py docstrings
+  - [ ] Refactor experimental files (one at a time)
+    - [ ] bmad_standalone.py
+    - [ ] bmad_coordinator_lite.py
+    - [ ] bmad_simple_test.py
+    - [ ] bmad_hardcore_factory.py
+    - [ ] bmad_album_producer.py
+    - [ ] bmad_dj_export.py
+    - [ ] bmad_mastering_chain.py
+    - [ ] bmad_qa_suite.py
+    - [ ] bmad_performance_monitor.py
+    - [ ] bmad_workflow_templates.py
+    - [ ] bmad_phase3_demo*.py (3 files)
+    - [ ] bmad_init*.py (2 files)
+    - [ ] bmad_examples.py
+  - [ ] Validate refactoring
+    - [ ] Audio regression tests for each file
+    - [ ] Grep for remaining magic numbers (should find none)
+    - [ ] Code review for constant usage consistency
+    - [ ] Performance validation (no regression)
+
+# ========== DEVELOPER SECTIONS (Updated by @dev) ==========
+
+dev_agent_record:
+  agent:
+  started:
+  completed:
+
+  hardcoded_value_inventory: |
+    Complete Catalog:
+    [File] : [Line] : [Hardcoded Value] → [Constant Reference]
+
+  constants_added: |
+    New Constants in synthesis_constants.py:
+    - [Constant Name] = [Value]  # [Rationale]
+
+  refactoring_log: |
+    Per-File Refactoring Results:
+    - [File]: [# values replaced] - [Audio regression: PASS/FAIL]
+
+  implementation_notes: |
+
+  file_list:
+    modified: []
+    created: []
+
+  change_log:
+    - date:
+      change:
+      reason:
+
+# ========== QA SECTIONS (Updated by @qa) ==========
+
+qa_results:
+  reviewer:
+  review_date:
+  verdict:
+
+  test_execution:
+    unit_tests:
+    integration_tests:
+    audio_regression_tests:
+
+  audio_validation:
+    spectral_analysis:
+    rms_comparison:
+    waveform_correlation:
+    human_listening:
+
+  code_quality:
+    magic_numbers_remaining:
+    constant_usage_consistency:
+    documentation_completeness:
+
+  issues_found:
+    critical: []
+    major: []
+    minor: []
+
+  improvements_suggested: |
+
+  final_notes: |

@@ -1,0 +1,105 @@
+# Story 5: Implementation Consolidation
+# Epic: Architecture Realignment & Technical Debt Cleanup
+
+---
+metadata:
+  story_id: story-phase1-consolidation-005-implementation
+  epic: docs/bmad-development/epics/epic-phase1-consolidation.md
+  phase: phase-1-consolidation
+  created_date: 2025-10-01
+  created_by: John (PM Agent)
+  size: XL
+  priority: P0
+  status: Ready for Development
+
+dependencies:
+  required_stories:
+    - "story-phase1-consolidation-001-tempo-fix"
+    - "story-phase1-consolidation-002-strategy-doc"
+    - "story-phase1-consolidation-003-constants"
+    - "story-phase1-consolidation-004-data-models"
+  external_deps: ["Approved consolidation strategy from Story 2"]
+
+context:
+  business_value: |
+    Core Consolidation: Merge three parallel implementations (bmad_standalone.py,
+    bmad_coordinator_lite.py, bmad_simple_test.py) into single unified system following
+    approved consolidation strategy and Story 001 architecture.
+
+    From Risk Assessment TECH-001 & BUS-001: "Three parallel implementations require
+    consolidation. Preserve working functionality (83 sessions, 1660 patterns)."
+
+  epic_relationship: |
+    Implements Epic Story 5: Implementation Consolidation. This is the core consolidation
+    work building on stable foundation from Stories 1-4.
+
+requirements:
+  functional: |
+    - Build unified implementation following approved strategy (from Story 2)
+    - Add unique features from all three implementations
+    - Follow Story 001 architecture patterns
+    - Preserve all working functionality
+    - Use Story 001 models and synthesis_constants.py
+
+  non_functional:
+    performance: Maintain 3.5s per session (±10%)
+    reliability: All features from experimental code preserved
+    maintainability: Single implementation, no parallel code paths
+
+acceptance_criteria:
+  - [ ] Unified implementation operational: Single entry point
+  - [ ] Feature parity validated: All experimental features present
+  - [ ] Story 001 architecture: Uses Pydantic models, constants
+  - [ ] Performance maintained: Within 10% of baseline
+  - [ ] All tests pass: Story 001 + new migration tests
+  - [ ] Experimental files archived: Moved to archive/bmad-experimental-backup/
+  - [ ] Documentation updated: Points to consolidated system
+
+testing:
+  unit_tests:
+    - All consolidated components
+    - Feature parity per implementation
+
+  integration_tests:
+    - End-to-end music generation
+    - Audio rendering pipeline
+    - Feature matrix validation
+
+  validation:
+    - Golden master audio comparison (>95% similarity)
+    - 30-minute production run (80+ sessions)
+    - Performance benchmarks
+
+tasks:
+  - [ ] Build unified implementation (per approved strategy)
+  - [ ] Add unique features from Implementation 1
+  - [ ] Add unique features from Implementation 2
+  - [ ] Add unique features from Implementation 3
+  - [ ] Integrate supporting file features (album, DJ export, QA, etc.)
+  - [ ] Archive experimental files
+  - [ ] Update documentation and entry points
+  - [ ] Run comprehensive validation
+
+# ========== DEVELOPER & QA SECTIONS ==========
+dev_agent_record:
+  agent:
+  started:
+  completed:
+
+  consolidation_log: |
+    Features Added:
+    - From Implementation 1: [list]
+    - From Implementation 2: [list]
+    - From Implementation 3: [list]
+    - From supporting files: [list]
+
+qa_results:
+  reviewer:
+  review_date:
+  verdict:
+
+  feature_parity_validation:
+    implementation_1_features:
+    implementation_2_features:
+    implementation_3_features:
+    missing_features: []

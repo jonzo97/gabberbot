@@ -1,0 +1,15 @@
+{
+  "start_time": "2025-10-01T03:58:32.614931",
+  "current_time": "2025-10-01T04:05:24.179208",
+  "end_time": "2025-10-01T04:28:32.614931",
+  "time_remaining_minutes": 23,
+  "total_sessions": 83,
+  "total_outputs": {
+    "sessions": 83,
+    "patterns": 1660,
+    "tracks": 415,
+    "presets": 1660
+  },
+  "current_session": 83,
+  "status": "running"
+}
