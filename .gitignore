@@ -106,3 +106,8 @@ node_modules/
 # Lock files (keep poetry.lock)
 package-lock.json
 yarn.lock
+
+# local/generated
+.claude/settings.local.json
+nul
+pattern_evolution_workspace/
